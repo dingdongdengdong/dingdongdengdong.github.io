@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dingdongdengdong.github.io/sitemap.xml
