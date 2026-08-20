@@ -1,97 +1,263 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Dongje Lee | Robotics, Embodied AI & Entrepreneurship</title>
-  <meta name="author" content="Dongje Lee">
-  <meta name="description" content="Dongje Lee — robotics engineer, embodied AI researcher, and entrepreneur building robot learning systems and robotics products.">
-  <meta name="keywords" content="robotics, embodied ai, robot learning, physical ai, sim-to-real, entrepreneur, engineering">
-  <style>:root{--max-content-width:930px}</style>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/alshedivat/al-folio@325fb3d816cba5b2f8c422f723ca84cbd149517e/assets/css/tailwind.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&display=swap">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/alshedivat/al-folio@325fb3d816cba5b2f8c422f723ca84cbd149517e/assets/css/jekyll-pygments-themes-github.css" id="highlight_theme_light">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/alshedivat/al-folio@325fb3d816cba5b2f8c422f723ca84cbd149517e/assets/css/main.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/alshedivat/al-folio@325fb3d816cba5b2f8c422f723ca84cbd149517e/assets/css/jekyll-pygments-themes-native.css" media="none" id="highlight_theme_dark">
-  <link rel="canonical" href="https://dingdongdengdong.github.io/">
-  <script src="https://cdn.jsdelivr.net/gh/alshedivat/al-folio@325fb3d816cba5b2f8c422f723ca84cbd149517e/assets/js/theme.js"></script>
-  <script>initTheme();</script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Dongje Lee — Robotics & Embodied AI. Robot learning, manipulation, sim-to-real, and physical AI research." />
+  <meta name="theme-color" content="#f4f4ef" />
+  <meta property="og:title" content="Dongje Lee — Robotics & Embodied AI" />
+  <meta property="og:description" content="Building learning-based robotic systems from simulation to physical deployment." />
+  <meta property="og:type" content="website" />
+  <title>Dongje Lee — Robotics & Embodied AI</title>
+  <link rel="stylesheet" href="/styles.css?v=20260820-2" />
 </head>
-<body class="fixed-top-nav sticky-bottom-footer">
-<header>
-  <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation">
-    <div class="container">
-      <a class="navbar-brand" href="/"><span class="font-weight-bold">Dongje</span> Lee</a>
-      <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="sr-only">Toggle navigation</span><span class="icon-bar top-bar"></span><span class="icon-bar middle-bar"></span><span class="icon-bar bottom-bar"></span>
-      </button>
-      <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav">
-        <ul class="navbar-nav navbar-menu-list flex-nowrap">
-          <li class="nav-item active"><a class="nav-link" href="/">about <span class="sr-only">(current)</span></a></li>
-          <li class="nav-item"><a class="nav-link" href="/projects/">projects</a></li>
-          <li class="nav-item"><a class="nav-link" href="/publications/">publications</a></li>
-          <li class="nav-item"><a class="nav-link" href="/experience/">experience</a></li>
-          <li class="nav-item"><a class="nav-link" href="https://github.com/dingdongdengdong" target="_blank" rel="noopener">github</a></li>
-          <li class="toggle-container"><button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"><i class="fa-half-sun-moon" id="light-toggle-system"></i><i class="fa-solid fa-moon" id="light-toggle-dark"></i><i class="fa-solid fa-sun" id="light-toggle-light"></i></button></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</header>
-<div class="container mt-5" role="main">
-  <div class="post">
-    <header class="post-header">
-      <h1 class="post-title"><span class="font-weight-bold">Dongje</span> Lee</h1>
-      <p class="desc">Robotics Engineer · Embodied AI Researcher · Entrepreneur</p>
-    </header>
-    <article>
-      <div class="clearfix">
-        <p>I build robotic systems at the intersection of <strong>robot learning, physical systems, and product execution</strong>. My current focus is learning-based manipulation on custom hardware: teleoperation, imitation learning, simulation, and sim-to-real validation.</p>
-        <p>I study <strong>Robot Software Engineering at Soongsil University</strong> and also pursue <strong>Next-Generation Semiconductor Engineering</strong>. I am especially interested in Embodied AI, Vision-Language-Action models, manipulation, synthetic data, and efficient deployment on real robots.</p>
-        <p>Beyond research, I operate <a href="https://revive-robotics.onrender.com/" target="_blank" rel="noopener">Revive Robotics</a>, a live robotics-focused product. I like taking ideas from technical prototypes to systems and services that people can actually use.</p>
-      </div>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Dongje Lee home">
+      <span class="brand-mark">DL</span>
+      <span class="brand-name">Dongje Lee</span>
+    </a>
+    <nav class="nav" aria-label="Primary navigation">
+      <a href="#research">Research</a>
+      <a href="#publication">Publication</a>
+      <a href="#product">Product</a>
+      <a href="#about">About</a>
+    </nav>
+    <a class="nav-cta" href="https://github.com/dingdongdengdong" target="_blank" rel="noreferrer">GitHub ↗</a>
+  </header>
 
-      <h2>selected work</h2>
-      <div class="projects">
-        <div class="row row-cols-1 row-cols-md-3">
-          <div class="col"><a href="/projects/custom-robot-learning/"><div class="card h-100 hoverable"><div class="card-body"><h2 class="card-title">Custom Robot Learning</h2><p class="card-text">VR teleoperation, LeRobot, ACT/VLA, Isaac Sim, MuJoCo, and physical deployment on a custom 5-DoF arm + AmazingHand.</p></div></div></a></div>
-          <div class="col"><a href="/projects/tickle-bot/"><div class="card h-100 hoverable"><div class="card-body"><h2 class="card-title">Tickle Bot</h2><p class="card-text">Collaborative low-cost Physical AI research platform. KIIS Fall Conference 2025 · Outstanding Paper Award.</p></div></div></a></div>
-          <div class="col"><a href="/projects/aerial-inspection/"><div class="card h-100 hoverable"><div class="card-body"><h2 class="card-title">Aerial Sim-to-Real</h2><p class="card-text">Synthetic defect data, Isaac Sim, PX4/ROS2, perception, and Jetson edge deployment for infrastructure inspection.</p></div></div></a></div>
-          <div class="col"><a href="/projects/revive-robotics/"><div class="card h-100 hoverable"><div class="card-body"><h2 class="card-title">Revive Robotics</h2><p class="card-text">A live robotics product I build and operate — product engineering, full-stack development, deployment, and operations.</p></div></div></a></div>
+  <main id="top">
+    <section class="hero section-shell">
+      <div class="hero-copy reveal">
+        <p class="eyebrow">Robotics · Embodied AI · Robot Learning</p>
+        <h1>Building intelligence that<br /><span>moves in the real world.</span></h1>
+        <p class="hero-lede">
+          I build learning-based robotic systems across manipulation, teleoperation,
+          simulation, and physical deployment — with a focus on turning research ideas
+          into reproducible robot experiments.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-dark" href="#research">View research</a>
+          <a class="button button-ghost" href="https://github.com/dingdongdengdong" target="_blank" rel="noreferrer">GitHub profile ↗</a>
+        </div>
+        <div class="hero-meta" aria-label="Research interests">
+          <span>Robot Manipulation</span><span>Sim-to-Real</span><span>VLA</span><span>Physical AI</span>
         </div>
       </div>
 
-      <h2>selected publication</h2>
-      <div class="publications">
-        <ol class="bibliography"><li><div class="row">
-          <div class="col col-sm-2 abbr"><abbr class="badge rounded w-100">KIIS 2025</abbr></div>
-          <div class="col-sm-8">
-            <div class="title">Tickle Bot: A Low-Cost Physical AI Research Platform</div>
-            <div class="author">Wook Ko, <em>Dongje Lee</em>, Yoonchang Choi, Heejae Jung, and Seojeong Park</div>
-            <div class="periodical"><em>2025 Fall Conference of the Korean Institute of Intelligent Systems</em>, 2025</div>
-            <div class="links"><a class="award btn btn-sm z-depth-0" role="button">Outstanding Paper Award</a><a href="https://kiis.or.kr/conf/2025f/SessionPaperList.asp?code=47" class="btn btn-sm z-depth-0" role="button" target="_blank" rel="noopener">Conference</a></div>
+      <div class="hero-visual reveal" aria-label="Robotics research pipeline illustration">
+        <svg viewBox="0 0 620 520" role="img" aria-labelledby="heroGraphicTitle">
+          <title id="heroGraphicTitle">Robot learning pipeline from human input to physical robot</title>
+          <defs>
+            <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
+              <path d="M 28 0 L 0 0 0 28" fill="none" stroke="currentColor" stroke-opacity=".07" stroke-width="1" />
+            </pattern>
+          </defs>
+          <rect width="620" height="520" rx="28" fill="url(#grid)" />
+          <g class="svg-muted" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M90 390 C160 320 180 315 230 290" stroke-dasharray="6 7" />
+            <path d="M390 250 C455 240 485 205 515 160" stroke-dasharray="6 7" />
+            <circle cx="90" cy="390" r="26" />
+            <circle cx="515" cy="160" r="26" />
+          </g>
+          <g class="robot" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M168 425 H355" stroke-width="18" />
+            <path d="M245 420 L254 338" stroke-width="28" />
+            <circle cx="256" cy="325" r="23" fill="var(--paper)" stroke-width="7" />
+            <path d="M272 311 L338 251" stroke-width="27" />
+            <circle cx="350" cy="240" r="21" fill="var(--paper)" stroke-width="7" />
+            <path d="M366 226 L408 181" stroke-width="22" />
+            <circle cx="419" cy="169" r="17" fill="var(--paper)" stroke-width="6" />
+            <path d="M431 158 L463 132" stroke-width="15" />
+            <path d="M462 132 L486 113 M463 132 L493 137 M463 132 L474 157" stroke-width="7" />
+          </g>
+          <g class="svg-labels" font-family="inherit" font-size="13" letter-spacing="1.4">
+            <text x="58" y="440">TELEOP</text>
+            <text x="452" y="102">POLICY</text>
+            <text x="255" y="479">PHYSICAL ROBOT</text>
+          </g>
+          <g class="pulse-dot"><circle cx="90" cy="390" r="7" /><circle cx="515" cy="160" r="7" /></g>
+        </svg>
+        <div class="visual-note visual-note-a"><span>01</span> Human demonstration</div>
+        <div class="visual-note visual-note-b"><span>02</span> Learn & evaluate</div>
+        <div class="visual-note visual-note-c"><span>03</span> Physical deployment</div>
+      </div>
+    </section>
+
+    <section class="ticker" aria-label="Research focus">
+      <div class="ticker-track">
+        <span>Robot Learning</span><i>×</i><span>Embodied AI</span><i>×</i><span>Manipulation</span><i>×</i><span>Sim-to-Real</span><i>×</i><span>Vision-Language-Action</span><i>×</i><span>Physical AI</span>
+      </div>
+    </section>
+
+    <section id="research" class="section-shell section-block">
+      <div class="section-heading reveal">
+        <div>
+          <p class="section-index">01 / Selected Research</p>
+          <h2>Research built around<br />physical systems.</h2>
+        </div>
+        <p class="section-intro">My current work connects custom robot hardware, simulation, data collection, learning policies, and real-world validation.</p>
+      </div>
+
+      <article class="project project-featured reveal">
+        <div class="project-copy">
+          <div class="project-topline"><span class="project-number">01</span><span class="status status-current">Current research</span></div>
+          <h3>Custom Robot Learning Platform</h3>
+          <p class="project-subtitle">VR teleoperation and imitation learning for a custom 5-DoF manipulator with AmazingHand.</p>
+          <p class="project-body">I am building an end-to-end workflow for a non-standard robot embodiment: teleoperate the custom arm, validate it in simulation, structure demonstrations as LeRobot datasets, and evaluate learning-based manipulation policies.</p>
+          <div class="tag-row"><span>LeRobot</span><span>ACT / VLA</span><span>Isaac Sim</span><span>MuJoCo</span><span>Quest 2</span><span>IK</span></div>
+          <div class="project-links">
+            <a href="https://github.com/dingdongdengdong/robot_arm_vr" target="_blank" rel="noreferrer">VR teleoperation ↗</a>
+            <a href="https://github.com/dingdongdengdong/superarm_ws" target="_blank" rel="noreferrer">Robot integration ↗</a>
           </div>
-        </div></li></ol>
-      </div>
-
-      <h2>currently</h2>
-      <p><strong>Research:</strong> custom robot manipulation, VLA / imitation learning, simulation-generated data, and sim-to-real evaluation.</p>
-      <p><strong>Engineering:</strong> ROS2, Isaac Sim, MuJoCo, Jetson, TensorRT, PX4, Python, C++, and full-stack product development.</p>
-      <p><strong>Building:</strong> <a href="https://revive-robotics.onrender.com/" target="_blank" rel="noopener">Revive Robotics</a>.</p>
-
-      <div class="social">
-        <div class="contact-icons">
-          <a href="https://github.com/dingdongdengdong" title="GitHub" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
-          <a href="mailto:dongje.musk.lee@gmail.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
-          <a href="https://revive-robotics.onrender.com/" title="Revive Robotics" target="_blank" rel="noopener"><i class="fa-solid fa-robot"></i></a>
         </div>
-        <div class="contact-note">Open to research collaboration, robotics engineering, and ambitious product work.</div>
+        <div class="project-visual flow-visual" aria-label="Custom robot learning architecture">
+          <div class="flow-node flow-accent"><b>Quest 2</b><small>6-DoF input</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><b>IK + Safety</b><small>workspace constraints</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node flow-large"><b>5-DoF Arm</b><small>+ AmazingHand</small></div>
+          <div class="flow-branch"><span>↓</span><span>↓</span></div>
+          <div class="flow-bottom">
+            <div class="flow-node"><b>Isaac / MuJoCo</b><small>digital twin</small></div>
+            <div class="flow-node"><b>LeRobot</b><small>dataset → policy</small></div>
+          </div>
+        </div>
+      </article>
+
+      <div class="project-grid">
+        <article class="project project-card reveal">
+          <div class="project-copy">
+            <div class="project-topline"><span class="project-number">02</span><span class="status status-award">Awarded research</span></div>
+            <h3>Tickle Bot</h3>
+            <p class="project-subtitle">A low-cost Physical AI research platform.</p>
+            <p class="project-body">A collaborative research platform designed to lower the hardware barrier for students and researchers experimenting with Physical AI and robotics algorithms.</p>
+            <div class="award-line"><span>★</span><div><b>Outstanding Paper Award</b><small>KIIS Fall Conference · 2025</small></div></div>
+            <div class="tag-row"><span>Physical AI</span><span>ROS2</span><span>AI–Robot Integration</span></div>
+            <div class="project-links">
+              <a href="https://github.com/dingdongdengdong/ticklebot_v1" target="_blank" rel="noreferrer">Code ↗</a>
+              <a href="https://kiis.or.kr/conf/2025f/SessionPaperList.asp?code=47" target="_blank" rel="noreferrer">Conference ↗</a>
+            </div>
+          </div>
+          <div class="project-mini-visual tickle-visual">
+            <span class="mini-kicker">ACCESSIBLE PHYSICAL AI</span>
+            <div class="platform-stack">
+              <div>AI / Algorithms</div>
+              <div>ROS2 Interface</div>
+              <div>Low-cost Robot Platform</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="project project-card reveal">
+          <div class="project-copy">
+            <div class="project-topline"><span class="project-number">03</span><span class="status">Ongoing</span></div>
+            <h3>Aerial Sim-to-Real Inspection</h3>
+            <p class="project-subtitle">Synthetic-data-driven defect inspection for aerial robotics.</p>
+            <p class="project-body">An ongoing pipeline connecting Isaac Sim, synthetic defect data, PX4/ROS2 flight software, edge perception, and Jetson deployment for infrastructure inspection.</p>
+            <div class="tag-row"><span>Isaac Sim</span><span>PX4</span><span>ROS2</span><span>Jetson</span><span>Vision</span></div>
+            <div class="project-links">
+              <a href="https://github.com/dingdongdengdong/aerial-crane-inspection" target="_blank" rel="noreferrer">Code ↗</a>
+            </div>
+          </div>
+          <div class="project-mini-visual aerial-visual">
+            <span class="mini-kicker">SIM → REAL PIPELINE</span>
+            <div class="aerial-pipeline">
+              <span>Isaac Sim</span><i>→</i><span>Synthetic Data</span><i>→</i><span>Perception</span><i>→</i><span>Jetson</span>
+            </div>
+            <div class="drone-mark" aria-hidden="true"><i></i><i></i><b>+</b><i></i><i></i></div>
+          </div>
+        </article>
       </div>
-    </article>
-  </div>
-</div>
-<footer class="fixed-bottom" role="contentinfo"><div class="container">Built with <a href="https://github.com/alshedivat/al-folio" target="_blank" rel="noopener">al-folio</a> · Hosted on GitHub Pages</div></footer>
-<script src="https://cdn.jsdelivr.net/gh/alshedivat/al-folio@325fb3d816cba5b2f8c422f723ca84cbd149517e/assets/js/nav-toggle.js"></script>
+    </section>
+
+    <section id="publication" class="publication-wrap">
+      <div class="section-shell publication-inner reveal">
+        <div class="publication-label"><span>02</span> Publication</div>
+        <div class="publication-main">
+          <p class="pub-type">Conference Paper · KIIS Fall Conference 2025</p>
+          <h2>Tickle Bot: A Low-Cost Physical AI Research Platform</h2>
+          <p class="pub-authors">Wook Ko · <strong>Dongje Lee</strong> · Yoonchang Choi · Heejae Jung · Seojeong Park</p>
+          <div class="pub-meta"><span>🏆 Outstanding Paper Award</span><span>Physical AI</span><span>Low-cost Robotics</span></div>
+        </div>
+        <a class="publication-link" href="https://kiis.or.kr/conf/2025f/SessionPaperList.asp?code=47" target="_blank" rel="noreferrer" aria-label="View Tickle Bot conference listing">↗</a>
+      </div>
+    </section>
+
+    <section id="product" class="section-shell section-block">
+      <div class="section-heading reveal">
+        <div>
+          <p class="section-index">03 / Product & Engineering</p>
+          <h2>Research is not the only<br />thing I ship.</h2>
+        </div>
+        <p class="section-intro">I also build and operate software products around robotics. This work is presented separately from my research projects.</p>
+      </div>
+
+      <article class="product-card reveal">
+        <div class="browser-mockup" aria-label="Revive Robotics website representation">
+          <div class="browser-bar"><span></span><span></span><span></span><p>revive-robotics.onrender.com</p></div>
+          <div class="browser-body">
+            <div class="revive-brand"><i>R</i><span>REVIVE<br />ROBOTICS</span></div>
+            <h3>Give robotics hardware<br />a second life.</h3>
+            <div class="browser-stats"><span>Robotics Hardware</span><span>Web Platform</span><span>Deployed Service</span></div>
+          </div>
+        </div>
+        <div class="product-copy">
+          <p class="eyebrow">Deployed product</p>
+          <h3>Revive Robotics</h3>
+          <p>A live robotics platform I operate, focused on making robotics hardware more accessible through a practical web-based service and product workflow.</p>
+          <ul>
+            <li>Publicly deployed web service</li>
+            <li>Robotics-domain product architecture</li>
+            <li>Private production source repository</li>
+          </ul>
+          <a class="button button-dark" href="https://revive-robotics.onrender.com/" target="_blank" rel="noreferrer">Visit live site ↗</a>
+        </div>
+      </article>
+    </section>
+
+    <section id="about" class="about-wrap">
+      <div class="section-shell about-grid">
+        <div class="about-copy reveal">
+          <p class="section-index">04 / About</p>
+          <h2>I care about the full robot stack.</h2>
+          <p>My interests sit at the boundary between robot learning and systems engineering: how a policy is trained matters, but so do embodiment, control interfaces, data quality, simulation fidelity, and deployment constraints.</p>
+          <p>I am particularly interested in manipulation, embodied AI, VLA models, synthetic data, and sim-to-real evaluation on custom robotic platforms.</p>
+        </div>
+        <div class="about-details reveal">
+          <div class="detail-group">
+            <p class="detail-label">Education</p>
+            <h3>Soongsil University</h3>
+            <p>Robot Software Engineering<br />Double Major: Next-Generation Semiconductor Engineering</p>
+          </div>
+          <div class="detail-group">
+            <p class="detail-label">Research stack</p>
+            <div class="stack-list">
+              <span>Robot Learning <b>LeRobot · ACT · VLA · PyTorch</b></span>
+              <span>Simulation <b>Isaac Sim · MuJoCo</b></span>
+              <span>Robotics <b>ROS2 · URDF · IK</b></span>
+              <span>Deployment <b>Jetson · TensorRT · PX4</b></span>
+              <span>Vision <b>OpenCV · YOLO · RGB-D</b></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer section-shell">
+    <div>
+      <p class="footer-title">Dongje Lee</p>
+      <p>Robotics · Embodied AI · Robot Learning</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/dingdongdengdong" target="_blank" rel="noreferrer">GitHub ↗</a>
+      <a href="#top">Back to top ↑</a>
+    </div>
+    <p class="footer-note">Built for research, not metrics.</p>
+  </footer>
+
+  <script src="/script.js?v=20260820-2"></script>
 </body>
 </html>
