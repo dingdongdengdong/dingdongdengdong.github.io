@@ -9,9 +9,13 @@
   <meta property="og:description" content="Building learning-based robotic systems from simulation to physical deployment." />
   <meta property="og:type" content="website" />
   <title>Dongje Lee — Robotics & Embodied AI</title>
-  <link rel="stylesheet" href="/styles.css?v=20260820-2" />
+  <link rel="alternate" hreflang="en" href="/" />
+  <link rel="alternate" hreflang="ko" href="/ko/" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/styles.css?v=20260901-1" />
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="noise" aria-hidden="true"></div>
   <header class="site-header">
     <a class="brand" href="#top" aria-label="Dongje Lee home">
@@ -24,10 +28,11 @@
       <a href="#product">Product</a>
       <a href="#about">About</a>
     </nav>
-    <a class="nav-cta" href="https://github.com/dingdongdengdong" target="_blank" rel="noreferrer">GitHub ↗</a>
+    <div class="header-actions"><a class="nav-cta" href="https://github.com/dingdongdengdong" target="_blank" rel="noreferrer">GitHub ↗</a><a class="language-link" href="/ko/" lang="ko" hreflang="ko" aria-label="한국어로 보기">한국어</a></div>
   </header>
 
-  <main id="top">
+  <main id="main-content">
+    <div id="top"></div>
     <section class="hero section-shell">
       <div class="hero-copy reveal">
         <p class="eyebrow">Robotics · Embodied AI · Robot Learning</p>
@@ -46,8 +51,9 @@
         </div>
       </div>
 
-      <div class="hero-visual reveal" aria-label="Robotics research pipeline illustration">
-        <svg viewBox="0 0 620 520" role="img" aria-labelledby="heroGraphicTitle">
+      <div class="hero-visual reveal" data-urdf-hero data-ready-label="Interactive SuperArm URDF ready" data-fallback-label="Static robot illustration" aria-label="Interactive SuperArm and AmazingHand model">
+        <div class="urdf-stage" data-urdf-stage role="img" aria-label="Animated five-joint SuperArm with eight-joint AmazingHand. Drag to rotate and scroll to zoom."></div>
+        <svg class="urdf-fallback" viewBox="0 0 620 520" role="img" aria-labelledby="heroGraphicTitle">
           <title id="heroGraphicTitle">Robot learning pipeline from human input to physical robot</title>
           <defs>
             <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
@@ -79,9 +85,11 @@
           </g>
           <g class="pulse-dot"><circle cx="90" cy="390" r="7" /><circle cx="515" cy="160" r="7" /></g>
         </svg>
-        <div class="visual-note visual-note-a"><span>01</span> Human demonstration</div>
-        <div class="visual-note visual-note-b"><span>02</span> Learn & evaluate</div>
-        <div class="visual-note visual-note-c"><span>03</span> Physical deployment</div>
+        <div class="visual-note visual-note-a"><span>URDF</span> 13 moving joints · 6D control</div>
+        <div class="visual-note visual-note-c">Drag to orbit · Scroll to zoom</div>
+        <div class="urdf-joint-chip"><span>Moving</span><b data-urdf-joint>SuperArm joint 1</b></div>
+        <button class="urdf-motion-toggle" type="button" data-urdf-toggle data-pause-label="Pause motion" data-play-label="Play motion" aria-pressed="false">Pause motion</button>
+        <p class="urdf-status" data-urdf-status role="status">Loading articulated URDF…</p>
       </div>
     </section>
 
@@ -97,7 +105,7 @@
           <p class="section-index">01 / Selected Research</p>
           <h2>Research built around<br />physical systems.</h2>
         </div>
-        <p class="section-intro">My current work connects custom robot hardware, simulation, data collection, learning policies, and real-world validation.</p>
+        <p class="section-intro">Each project is documented as an engineering case study: what problem it addresses, what has been implemented, how it was validated, and what remains unfinished.</p>
       </div>
 
       <article class="project project-featured reveal">
@@ -106,10 +114,15 @@
           <h3>Custom Robot Learning Platform</h3>
           <p class="project-subtitle">VR teleoperation and imitation learning for a custom 5-DoF manipulator with AmazingHand.</p>
           <p class="project-body">I am building an end-to-end workflow for a non-standard robot embodiment: teleoperate the custom arm, validate it in simulation, structure demonstrations as LeRobot datasets, and evaluate learning-based manipulation policies.</p>
+          <dl class="project-facts" aria-label="Verified project evidence">
+            <div><dt>90.1 Hz</dt><dd>median Quest input rate</dd></div>
+            <div><dt>0.027 ms</dt><dd>documented IK solve time</dd></div>
+            <div><dt>30 tests</dt><dd>safety-layer validation</dd></div>
+          </dl>
           <div class="tag-row"><span>LeRobot</span><span>ACT / VLA</span><span>Isaac Sim</span><span>MuJoCo</span><span>Quest 2</span><span>IK</span></div>
           <div class="project-links">
-            <a href="https://github.com/dingdongdengdong/robot_arm_vr" target="_blank" rel="noreferrer">VR teleoperation ↗</a>
-            <a href="https://github.com/dingdongdengdong/superarm_ws" target="_blank" rel="noreferrer">Robot integration ↗</a>
+            <a class="case-link" href="/projects/robot-learning/">Read case study →</a>
+            <a href="https://github.com/dingdongdengdong/robot_arm_vr" target="_blank" rel="noreferrer">Source ↗</a>
           </div>
         </div>
         <div class="project-visual flow-visual" aria-label="Custom robot learning architecture">
@@ -134,10 +147,14 @@
             <p class="project-subtitle">A low-cost Physical AI research platform.</p>
             <p class="project-body">A collaborative research platform designed to lower the hardware barrier for students and researchers experimenting with Physical AI and robotics algorithms.</p>
             <div class="award-line"><span>★</span><div><b>Outstanding Paper Award</b><small>KIIS Fall Conference · 2025</small></div></div>
+            <dl class="project-facts project-facts-compact" aria-label="Publication evidence">
+              <div><dt>KIIS 2025</dt><dd>conference paper</dd></div>
+              <div><dt>5 authors</dt><dd>cross-university team</dd></div>
+            </dl>
             <div class="tag-row"><span>Physical AI</span><span>ROS2</span><span>AI–Robot Integration</span></div>
             <div class="project-links">
-              <a href="https://github.com/dingdongdengdong/ticklebot_v1" target="_blank" rel="noreferrer">Code ↗</a>
-              <a href="https://kiis.or.kr/conf/2025f/SessionPaperList.asp?code=47" target="_blank" rel="noreferrer">Conference ↗</a>
+              <a class="case-link" href="/projects/tickle-bot/">Read case study →</a>
+              <a href="https://kiis.or.kr/conf/2025f/SessionPaperList.asp?code=47" target="_blank" rel="noreferrer">Paper ↗</a>
             </div>
           </div>
           <div class="project-mini-visual tickle-visual">
@@ -153,12 +170,14 @@
         <article class="project project-card reveal">
           <div class="project-copy">
             <div class="project-topline"><span class="project-number">03</span><span class="status">Ongoing</span></div>
-            <h3>Aerial Sim-to-Real Inspection</h3>
-            <p class="project-subtitle">Synthetic-data-driven defect inspection for aerial robotics.</p>
+            <h3>Drone Inspection Platform</h3>
+            <p class="project-subtitle">Smart-maritime inspection research spanning synthetic data, vision AI, edge inference, and field workflows.</p>
             <p class="project-body">An ongoing pipeline connecting Isaac Sim, synthetic defect data, PX4/ROS2 flight software, edge perception, and Jetson deployment for infrastructure inspection.</p>
+            <div class="status-note"><strong>Current evidence</strong><span>Architecture, safety contracts, mission definitions, and simulation tooling are implemented. Training and hardware targets remain planned.</span></div>
             <div class="tag-row"><span>Isaac Sim</span><span>PX4</span><span>ROS2</span><span>Jetson</span><span>Vision</span></div>
             <div class="project-links">
-              <a href="https://github.com/dingdongdengdong/aerial-crane-inspection" target="_blank" rel="noreferrer">Code ↗</a>
+              <a class="case-link" href="/projects/aerial-inspection/">Read case study →</a>
+              <a href="https://github.com/dingdongdengdong/isaacsim_focused" target="_blank" rel="noreferrer">Isaac Sim source ↗</a>
             </div>
           </div>
           <div class="project-mini-visual aerial-visual">
@@ -169,6 +188,32 @@
             <div class="drone-mark" aria-hidden="true"><i></i><i></i><b>+</b><i></i><i></i></div>
           </div>
         </article>
+
+        <article class="project project-card reveal">
+          <div class="project-copy">
+            <div class="project-topline"><span class="project-number">04</span><span class="status status-current">2026 development</span></div>
+            <h3>Eco-Rover +<br />Customarm</h3>
+            <p class="project-subtitle">Autonomous urban-environment collection platform with a custom-arm integration path.</p>
+            <p class="project-body">A 2026 Hanium Dream Up development project that connects autonomous navigation, environmental sensing, collection behavior, and a Customarm subsystem in one mobile robot platform.</p>
+            <div class="status-note"><strong>Source-backed scope</strong><span>Project story and visual evidence are drawn from the development report; no unavailable repository is linked.</span></div>
+            <div class="tag-row"><span>Autonomy</span><span>Customarm</span><span>Mobile Robotics</span><span>Environmental AI</span></div>
+            <div class="project-links"><a class="case-link" href="/projects/eco-rover/">Read case study →</a></div>
+          </div>
+          <div class="project-mini-visual report-visual">
+            <span class="mini-kicker">SYSTEM-INTEGRATION CASE</span>
+            <img src="/assets/reports/eco-rover-report-cover.png" alt="Eco-Rover 2026 development report cover" />
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="research-ledger section-shell reveal" aria-labelledby="research-ledger-title">
+      <div><p class="section-index">Research ledger / 2025—2026</p><h2 id="research-ledger-title">From accessible platforms to field-ready systems.</h2></div>
+      <div class="ledger-list">
+        <article><time>2025</time><div><h3>Tickle Bot</h3><p>Conference research on lowering the barrier to Physical AI experimentation, supported by a public demo and project report.</p></div></article>
+        <article><time>2026</time><div><h3>Robot learning & Customarm</h3><p>Teleoperation, kinematics, simulation, safety, and learning-ready data flows for non-standard embodiments.</p></div></article>
+        <article><time>2026</time><div><h3>Drone inspection</h3><p>Isaac Sim synthetic data, vision models, edge inference, localization, and a staged physical validation roadmap.</p></div></article>
+        <article><time>2026</time><div><h3>Eco-Rover</h3><p>An integrated mobile platform that brings autonomy, sensing, collection behavior, and Customarm work into a public-environment use case.</p></div></article>
       </div>
     </section>
 
@@ -229,7 +274,24 @@
           <div class="detail-group">
             <p class="detail-label">Education</p>
             <h3>Soongsil University</h3>
-            <p>Robot Software Engineering<br />Double Major: Next-Generation Semiconductor Engineering</p>
+            <p>Physics<br />Double Major: Next-Generation Semiconductor Engineering</p>
+          </div>
+          <div class="detail-group">
+            <p class="detail-label">Recognition</p>
+            <figure class="award-evidence">
+              <a class="award-evidence-image" href="/assets/2024_2_%EC%9A%B0%EC%88%98%EC%83%81/9.%EC%8B%9C%EC%8A%A4%ED%85%9CSW_%ED%8F%B0%EB%85%B8%EC%9D%B4%EB%A7%8C.jpg" target="_blank" rel="noreferrer" aria-label="Open the full 2024 competition poster">
+                <img src="/assets/2024_2_%EC%9A%B0%EC%88%98%EC%83%81/9.%EC%8B%9C%EC%8A%A4%ED%85%9CSW_%ED%8F%B0%EB%85%B8%EC%9D%B4%EB%A7%8C.jpg" alt="Poster for the accident-prevention BMS project presented at the 2024 Next-Generation Semiconductor Competition" loading="lazy" decoding="async" />
+              </a>
+              <figcaption>
+                <span>2024 · Next-Generation Semiconductor Department Competition</span>
+                <h3>Excellence Award</h3>
+                <p>Accident-prevention battery management system designed to reduce information asymmetry.</p>
+                <div class="award-evidence-links">
+                  <a href="/assets/2024_2_%EC%9A%B0%EC%88%98%EC%83%81/9.%EC%8B%9C%EC%8A%A4%ED%85%9CSW_%ED%8F%B0%EB%85%B8%EC%9D%B4%EB%A7%8C.jpg" target="_blank" rel="noreferrer">View poster ↗</a>
+                  <a href="/assets/2024_2_%EC%9A%B0%EC%88%98%EC%83%81/%EC%8B%9C%EC%8A%A4%ED%85%9Csw_%ED%8F%B0%EB%85%B8%EC%9D%B4%EB%A7%8C_BMS.pptx.pdf" target="_blank" rel="noreferrer">Project deck ↗</a>
+                </div>
+              </figcaption>
+            </figure>
           </div>
           <div class="detail-group">
             <p class="detail-label">Research stack</p>
@@ -258,6 +320,7 @@
     <p class="footer-note">Built for research, not metrics.</p>
   </footer>
 
-  <script src="/script.js?v=20260820-2"></script>
+  <script type="module" src="/assets/robot/urdf-hero.bundle.js?v=20260901-4"></script>
+  <script src="/script.js?v=20260901-1"></script>
 </body>
 </html>

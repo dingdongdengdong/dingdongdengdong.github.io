@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="사례 연구: 항공 인프라 점검을 위한 Isaac Sim, PX4, ROS2, Jetson 파이프라인." />
+  <meta name="theme-color" content="#f4f4ef" />
+  <title>항공 Sim-to-Real 점검 — 이동제</title>
+  <link rel="alternate" hreflang="ko" href="/ko/projects/aerial-inspection/" />
+  <link rel="alternate" hreflang="en" href="/projects/aerial-inspection/" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/styles.css?v=20260901-1" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">본문으로 건너뛰기</a><div class="noise" aria-hidden="true"></div>
+  <header class="site-header"><a class="brand" href="/ko/#top" aria-label="이동제 홈"><span class="brand-mark">DL</span><span class="brand-name">이동제</span></a><nav class="nav" aria-label="주요 메뉴"><a href="/ko/#research" aria-current="page">연구</a><a href="/ko/#publication">논문</a><a href="/ko/#product">제품</a><a href="/ko/#about">소개</a></nav><div class="header-actions"><a class="nav-cta" href="https://github.com/dingdongdengdong" target="_blank" rel="noreferrer">GitHub ↗</a><a class="language-link" href="/projects/aerial-inspection/" lang="en" hreflang="en" aria-label="View in English">EN</a></div></header>
+
+  <main id="main-content" class="case-study">
+    <section class="case-hero section-shell reveal"><div class="case-breadcrumb"><a href="/ko/#research">주요 연구</a><span>/</span><span>03</span></div><div class="case-hero-grid"><div><div class="case-status"><span class="status">진행 중</span><span>2026</span></div><h1>항공 Sim-to-Real<br /><span>점검</span></h1><p class="case-lede">AI를 모터 제어 안전 경계 밖에 두면서 합성 장면, 자율 비행 소프트웨어, 결함 인식, 엣지 배포를 연결하는 크레인 및 인프라 점검 구현 프레임워크입니다.</p><div class="case-actions"><a class="button button-dark" href="https://github.com/dingdongdengdong/isaacsim_focused" target="_blank" rel="noreferrer">소스 보기 ↗</a></div></div><dl class="case-summary" aria-label="프로젝트 요약"><div><dt>주제</dt><dd>합성 데이터, 항공 자율성, 엣지 인식</dd></div><div><dt>시뮬레이션</dt><dd>Isaac Sim + Pegasus + PX4 SITL</dd></div><div><dt>실행 환경</dt><dd>ROS2 Humble, MAVROS, TensorRT 경로</dd></div><div><dt>현재 범위</dt><dd>아키텍처와 도구는 존재하며 결과 목표는 계획 단계</dd></div></dl></div></section>
+
+    <section class="case-band"><div class="section-shell principle-banner reveal"><span>안전 불변조건</span><strong>AI는 결함을 탐지하고 보고합니다. 모터를 직접 명령하지 않습니다.</strong><p>비행 명령은 오토파일럿과 ROS2 액션 경계 안에 유지됩니다.</p></div></section>
+
+    <section class="case-section section-shell"><div class="case-section-heading reveal"><p class="section-index">01 / 시스템 목표</p><h2>벤치마크 결과를 제시하기 전에 통합 경로부터 구축합니다.</h2></div><div class="case-two-column reveal"><p class="case-emphasis">저장소는 합성 데이터와 베이스라인 학습에서 ROS2 통합, Jetson 최적화, 최종 실물 데모까지 이어지는 8개 마일스톤의 Sim-to-Real 프로그램으로 구성됩니다.</p><div class="case-prose"><p>현재 공개 근거는 아키텍처, 안전, 미션, 시뮬레이션 스크립트, 계약 테스트 수준에서 가장 강합니다. 데이터셋 규모, mAP, 지연, Jetson 프레임 속도는 완료된 결과가 아니라 수용 기준입니다.</p><p>이 구분이 이 사례의 핵심입니다. 로드맵을 성공 결과처럼 포장하지 않으면서 작업 분해와 안전 설계를 보여줍니다.</p></div></div></section>
+
+    <section class="case-section section-shell"><div class="case-section-heading reveal"><p class="section-index">02 / 아키텍처</p><h2>시뮬레이션, autonomy, perception, and deployment remain separate systems.</h2></div><div class="aerial-architecture reveal" aria-label="항공 점검 아키텍처"><div class="aerial-layer"><b>Isaac Sim + Pegasus</b><span>항만 장면 · 크레인 에셋 · 쿼드로터 · 점검 카메라</span></div><i>↓</i><div class="aerial-layer"><b>PX4 SITL + MAVROS</b><span>비행 제어기 · MAVLink 브리지 · 기체 상태</span></div><i>↓</i><div class="aerial-split"><div><b>미션 & 자율성</b><span>이륙 · 착륙 · 선회 · 오프보드 · YAML 운용개념</span></div><div><b>결함 인식</b><span>합성 데이터 · ONNX/TensorRT 경로 · 보고서</span></div></div><i>↓</i><div class="aerial-layer aerial-layer-final"><b>Jetson 배포 경로</b><span>엣지 추론 목표 · 계획된 실물 검증</span></div></div><div class="evidence-grid"><article class="evidence-card reveal"><span>01</span><h3>미션 계약</h3><p>ROS2 액션과 YAML 미션 정의가 고수준 점검 동작과 비행 제어기 실행을 분리합니다.</p></article><article class="evidence-card reveal"><span>02</span><h3>시뮬레이션 tooling</h3><p>저장소 스크립트는 장면 설정, Pegasus 드론 생성, ROS2 브리지, 합성 데이터 생성, 통합 진단을 다룹니다.</p></article><article class="evidence-card reveal"><span>03</span><h3>안전 문서</h3><p>명시적인 절차가 AI 경계, 주입 순서, 운용 점검, 보고와 제어의 구분을 정의합니다.</p></article></div></section>
+
+    <section class="case-section section-shell"><div class="case-section-heading reveal"><p class="section-index">03 / 검증 로드맵</p><h2>목표를 숨기지 않되, 목표임을 명확히 표시합니다.</h2></div><div class="roadmap reveal"><div class="roadmap-item roadmap-current"><span>구현된 기반</span><h3>아키텍처 & 계약</h3><p>ROS2 패키지, 미션 정의, 안전 문서, Isaac 통합 스크립트, 자동 테스트 기반.</p></div><div class="roadmap-item"><span>계획된 평가</span><h3>합성 데이터 베이스라인</h3><p>대규모 합성 데이터셋을 생성하고 초기 결함 탐지기를 문서화된 수용 기준으로 평가합니다.</p></div><div class="roadmap-item"><span>계획된 평가</span><h3>도메인 강화</h3><p>실제 점검 이미지를 혼합하기 전에 날씨, 센서, 재질, 배경 변화를 추가합니다.</p></div><div class="roadmap-item"><span>계획된 배포</span><h3>Jetson & 비행 테스트</h3><p>엣지 추론을 벤치마크하고 지연 및 열 동작을 확인한 뒤 실물 하드웨어에서 보고 파이프라인을 검증합니다.</p></div></div></section>
+
+    <section class="case-section case-status-section"><div class="section-shell"><div class="case-section-heading reveal"><p class="section-index">04 / 상태</p><h2>구현된 산출물과 계획된 결과를 구분합니다.</h2></div><div class="status-columns reveal"><div><h3>현재 제공</h3><ul class="check-list"><li>ROS2 워크스페이스와 자율성 패키지 구조</li><li>크레인 점검 미션 정의</li><li>Isaac Sim 및 Pegasus 통합 스크립트</li><li>안전 경계와 운용 문서</li><li>계약 중심 테스트 스위트</li></ul></div><div><h3>아직 달성으로 제시하지 않음</h3><ul class="open-list"><li>5,000장 합성 데이터셋 목표</li><li>mAP 수용 기준</li><li>200ms 미만 종단 간 지연 목표</li><li>Jetson 30 FPS 배포 목표</li><li>실제 비행 점검 데모</li></ul></div></div></div></section>
+
+    <section class="case-section section-shell"><div class="case-section-heading reveal"><p class="section-index">05 / 2026 개발보고서</p><h2>시뮬레이션 결함 데이터에서 엣지 기반 점검 워크플로까지.</h2></div><div class="evidence-grid"><article class="evidence-card reveal"><span>데이터</span><h3>합성 결함 데이터</h3><p>개발보고서는 균열·부식 모델 개발을 위해 Isaac Sim Replicator와 SteelCrack, OmniCrack30K 데이터 소스를 활용하는 계획을 설명합니다.</p></article><article class="evidence-card reveal"><span>배포 경로</span><h3>비전에서 엣지 장치까지</h3><p>YOLO·SegFormer 비교, Jetson Orin Nano 추론, 단계적 카메라 검증을 개발 및 평가 작업으로 기록합니다.</p></article><article class="evidence-card reveal"><span>물리 워크플로</span><h3>위치 추정, 표식, 기록</h3><p>의도한 시스템은 결함 위치를 추정하고 2축 매니퓰레이터로 접근해 자석 표식을 부착한 뒤 대시보드에 결과를 기록합니다.</p></article></div></section><nav class="case-pagination section-shell" aria-label="Project navigation"><a href="/ko/projects/tickle-bot/"><span>이전 사례</span><b>← Tickle Bot</b></a><a href="/ko/#research"><span>전체 프로젝트</span><b>연구 목록 →</b></a></nav>
+  </main>
+  <footer class="site-footer section-shell"><div><p class="footer-title">이동제</p><p>로보틱스 · 체화형 AI · 로봇 학습</p></div><div class="footer-links"><a href="https://github.com/dingdongdengdong" target="_blank" rel="noreferrer">GitHub ↗</a><a href="/ko/#top">홈 ↑</a></div><p class="footer-note">근거를 우선하고, 진행 중인 작업은 명확히 표시합니다.</p></footer>
+  <script src="/script.js?v=20260901-1"></script>
+</body>
+</html>

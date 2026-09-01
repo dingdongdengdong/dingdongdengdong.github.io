@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="이동제 — 로보틱스와 체화형 AI. 로봇 학습, 매니퓰레이션, Sim-to-Real, Physical AI 연구." />
+  <meta name="theme-color" content="#f4f4ef" />
+  <meta property="og:title" content="이동제 — 로보틱스 & 체화형 AI" />
+  <meta property="og:description" content="시뮬레이션부터 실제 배포까지 이어지는 학습 기반 로봇 시스템을 만듭니다." />
+  <meta property="og:type" content="website" />
+  <title>이동제 — 로보틱스 & 체화형 AI</title>
+  <link rel="alternate" hreflang="ko" href="/ko/" />
+  <link rel="alternate" hreflang="en" href="/" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/styles.css?v=20260901-1" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+  <div class="noise" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="이동제 홈">
+      <span class="brand-mark">DL</span>
+      <span class="brand-name">이동제</span>
+    </a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="#research">연구</a>
+      <a href="#publication">논문</a>
+      <a href="#product">제품</a>
+      <a href="#about">소개</a>
+    </nav>
+    <div class="header-actions"><a class="nav-cta" href="https://github.com/dingdongdengdong" target="_blank" rel="noreferrer">GitHub ↗</a><a class="language-link" href="/" lang="en" hreflang="en" aria-label="View in English">EN</a></div>
+  </header>
+
+  <main id="main-content">
+    <div id="top"></div>
+    <section class="hero section-shell">
+      <div class="hero-copy reveal">
+        <p class="eyebrow">로보틱스 · 체화형 AI · 로봇 학습</p>
+        <h1>현실 세계에서<br /><span>움직이는 지능을 만듭니다.</span></h1>
+        <p class="hero-lede">
+          매니퓰레이션, 텔레오퍼레이션, 시뮬레이션, 실제 배포를 아우르는 학습 기반 로봇 시스템을 만듭니다. 연구 아이디어를 재현 가능한 로봇 실험으로 구현하는 데 집중합니다.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-dark" href="#research">연구 보기</a>
+          <a class="button button-ghost" href="https://github.com/dingdongdengdong" target="_blank" rel="noreferrer">GitHub 프로필 ↗</a>
+        </div>
+        <div class="hero-meta" aria-label="연구 관심 분야">
+          <span>로봇 매니퓰레이션</span><span>Sim-to-Real</span><span>VLA</span><span>Physical AI</span>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal" data-urdf-hero data-ready-label="SuperArm 인터랙티브 URDF 준비 완료" data-fallback-label="정적 로봇 일러스트" aria-label="SuperArm과 AmazingHand 인터랙티브 모델">
+        <div class="urdf-stage" data-urdf-stage role="img" aria-label="5개 팔 관절과 8개 손 관절이 움직이는 SuperArm과 AmazingHand. 드래그하여 회전하고 스크롤하여 확대할 수 있습니다."></div>
+        <svg class="urdf-fallback" viewBox="0 0 620 520" role="img" aria-labelledby="heroGraphicTitle">
+          <title id="heroGraphicTitle">사람의 입력에서 실제 로봇까지 이어지는 로봇 학습 파이프라인</title>
+          <defs>
+            <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
+              <path d="M 28 0 L 0 0 0 28" fill="none" stroke="currentColor" stroke-opacity=".07" stroke-width="1" />
+            </pattern>
+          </defs>
+          <rect width="620" height="520" rx="28" fill="url(#grid)" />
+          <g class="svg-muted" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M90 390 C160 320 180 315 230 290" stroke-dasharray="6 7" />
+            <path d="M390 250 C455 240 485 205 515 160" stroke-dasharray="6 7" />
+            <circle cx="90" cy="390" r="26" />
+            <circle cx="515" cy="160" r="26" />
+          </g>
+          <g class="robot" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M168 425 H355" stroke-width="18" />
+            <path d="M245 420 L254 338" stroke-width="28" />
+            <circle cx="256" cy="325" r="23" fill="var(--paper)" stroke-width="7" />
+            <path d="M272 311 L338 251" stroke-width="27" />
+            <circle cx="350" cy="240" r="21" fill="var(--paper)" stroke-width="7" />
+            <path d="M366 226 L408 181" stroke-width="22" />
+            <circle cx="419" cy="169" r="17" fill="var(--paper)" stroke-width="6" />
+            <path d="M431 158 L463 132" stroke-width="15" />
+            <path d="M462 132 L486 113 M463 132 L493 137 M463 132 L474 157" stroke-width="7" />
+          </g>
+          <g class="svg-labels" font-family="inherit" font-size="13" letter-spacing="1.4">
+            <text x="58" y="440">텔레옵</text>
+            <text x="452" y="102">정책</text>
+            <text x="255" y="479">실제 로봇</text>
+          </g>
+          <g class="pulse-dot"><circle cx="90" cy="390" r="7" /><circle cx="515" cy="160" r="7" /></g>
+        </svg>
+        <div class="visual-note visual-note-a"><span>URDF</span> 13개 가동 관절 · 6D 제어</div>
+        <div class="visual-note visual-note-c">드래그 회전 · 스크롤 확대</div>
+        <div class="urdf-joint-chip"><span>가동 중</span><b data-urdf-joint>SuperArm joint 1</b></div>
+        <button class="urdf-motion-toggle" type="button" data-urdf-toggle data-pause-label="동작 일시정지" data-play-label="동작 재생" aria-pressed="false">동작 일시정지</button>
+        <p class="urdf-status" data-urdf-status role="status">URDF 모델을 불러오는 중…</p>
+      </div>
+    </section>
+
+    <section class="ticker" aria-label="연구 분야">
+      <div class="ticker-track">
+        <span>로봇 학습</span><i>×</i><span>체화형 AI</span><i>×</i><span>매니퓰레이션</span><i>×</i><span>Sim-to-Real</span><i>×</i><span>비전-Language-Action</span><i>×</i><span>Physical AI</span>
+      </div>
+    </section>
+
+    <section id="research" class="section-shell section-block">
+      <div class="section-heading reveal">
+        <div>
+          <p class="section-index">01 / 주요 연구</p>
+          <h2>물리 시스템을 중심으로<br />구축한 연구.</h2>
+        </div>
+        <p class="section-intro">각 프로젝트는 해결하려는 문제, 실제 구현 내용, 검증 방법, 남은 과제를 구분한 엔지니어링 사례로 정리했습니다.</p>
+      </div>
+
+      <article class="project project-featured reveal">
+        <div class="project-copy">
+          <div class="project-topline"><span class="project-number">01</span><span class="status status-current">진행 중인 연구</span></div>
+          <h3>Custom 로봇 학습 Platform</h3>
+          <p class="project-subtitle">AmazingHand를 결합한 커스텀 5-DoF 매니퓰레이터의 VR 텔레오퍼레이션 및 모방학습.</p>
+          <p class="project-body">비표준 로봇 형태를 위한 엔드투엔드 워크플로를 구축하고 있습니다. 커스텀 팔을 원격 조작하고, 시뮬레이션으로 검증하며, 시연을 LeRobot 데이터셋으로 구조화해 학습 기반 매니퓰레이션 정책을 평가합니다.</p>
+          <dl class="project-facts" aria-label="검증된 프로젝트 근거">
+            <div><dt>90.1 Hz</dt><dd>Quest 입력 중앙값</dd></div>
+            <div><dt>0.027 ms</dt><dd>문서화된 IK 계산 시간</dd></div>
+            <div><dt>30 tests</dt><dd>안전 계층 검증</dd></div>
+          </dl>
+          <div class="tag-row"><span>LeRobot</span><span>ACT / VLA</span><span>Isaac Sim</span><span>MuJoCo</span><span>Quest 2</span><span>IK</span></div>
+          <div class="project-links">
+            <a class="case-link" href="/ko/projects/robot-learning/">사례 자세히 보기 →</a>
+            <a href="https://github.com/dingdongdengdong/robot_arm_vr" target="_blank" rel="noreferrer">소스 ↗</a>
+          </div>
+        </div>
+        <div class="project-visual flow-visual" aria-label="Custom robot learning architecture">
+          <div class="flow-node flow-accent"><b>Quest 2</b><small>6-DoF 입력</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><b>IK + Safety</b><small>작업공간 제약</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node flow-large"><b>5-DoF Arm</b><small>+ AmazingHand</small></div>
+          <div class="flow-branch"><span>↓</span><span>↓</span></div>
+          <div class="flow-bottom">
+            <div class="flow-node"><b>Isaac / MuJoCo</b><small>디지털 트윈</small></div>
+            <div class="flow-node"><b>LeRobot</b><small>데이터셋 → 정책</small></div>
+          </div>
+        </div>
+      </article>
+
+      <div class="project-grid">
+        <article class="project project-card reveal">
+          <div class="project-copy">
+            <div class="project-topline"><span class="project-number">02</span><span class="status status-award">수상 연구</span></div>
+            <h3>Tickle Bot</h3>
+            <p class="project-subtitle">저비용 Physical AI 연구 플랫폼.</p>
+            <p class="project-body">Physical AI와 로보틱스 알고리즘을 실험하는 학생과 연구자의 하드웨어 진입 장벽을 낮추기 위해 설계한 공동 연구 플랫폼입니다.</p>
+            <div class="award-line"><span>★</span><div><b>우수논문상</b><small>KIIS 추계학술대회 · 2025</small></div></div>
+            <dl class="project-facts project-facts-compact" aria-label="논문 근거">
+              <div><dt>KIIS 2025</dt><dd>학술대회 논문</dd></div>
+              <div><dt>저자 5명</dt><dd>대학 간 공동 연구</dd></div>
+            </dl>
+            <div class="tag-row"><span>Physical AI</span><span>ROS2</span><span>AI–Robot Integration</span></div>
+            <div class="project-links">
+              <a class="case-link" href="/ko/projects/tickle-bot/">사례 자세히 보기 →</a>
+              <a href="https://kiis.or.kr/conf/2025f/SessionPaperList.asp?code=47" target="_blank" rel="noreferrer">논문 ↗</a>
+            </div>
+          </div>
+          <div class="project-mini-visual tickle-visual">
+            <span class="mini-kicker">접근 가능한 PHYSICAL AI</span>
+            <div class="platform-stack">
+              <div>AI / 알고리즘</div>
+              <div>ROS2 Interface</div>
+              <div>저비용 로봇 플랫폼</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="project project-card reveal">
+          <div class="project-copy">
+            <div class="project-topline"><span class="project-number">03</span><span class="status">진행 중</span></div>
+            <h3>항공 Sim-to-Real 점검</h3>
+            <p class="project-subtitle">합성 데이터, 비전 AI, 엣지 추론, 현장 워크플로를 아우르는 스마트 해양 점검 연구.</p>
+            <p class="project-body">인프라 점검을 위해 Isaac Sim, 합성 결함 데이터, PX4/ROS2 비행 소프트웨어, 엣지 인식, Jetson 배포를 연결하는 파이프라인입니다.</p>
+            <div class="status-note"><strong>현재 근거</strong><span>아키텍처, 안전 계약, 미션 정의, 시뮬레이션 도구가 구현되어 있습니다. 학습과 실제 하드웨어 목표는 계획 단계입니다.</span></div>
+            <div class="tag-row"><span>Isaac Sim</span><span>PX4</span><span>ROS2</span><span>Jetson</span><span>비전</span></div>
+            <div class="project-links">
+              <a class="case-link" href="/ko/projects/aerial-inspection/">사례 자세히 보기 →</a>
+              <a href="https://github.com/dingdongdengdong/aerial-crane-inspection" target="_blank" rel="noreferrer">소스 ↗</a>
+            </div>
+          </div>
+          <div class="project-mini-visual aerial-visual">
+            <span class="mini-kicker">SIM → REAL 파이프라인</span>
+            <div class="aerial-pipeline">
+              <span>Isaac Sim</span><i>→</i><span>합성 데이터</span><i>→</i><span>인식</span><i>→</i><span>Jetson</span>
+            </div>
+            <div class="drone-mark" aria-hidden="true"><i></i><i></i><b>+</b><i></i><i></i></div>
+          </div>
+        </article>
+
+        <article class="project project-card reveal">
+          <div class="project-copy">
+            <div class="project-topline"><span class="project-number">04</span><span class="status status-current">2026 개발</span></div>
+            <h3>Eco-Rover +<br />Customarm</h3>
+            <p class="project-subtitle">커스텀 암 연동 경로를 갖춘 자율 도시 환경 수거 로봇 플랫폼.</p>
+            <p class="project-body">자율주행, 환경 인지, 수거 동작, Customarm 서브시스템을 하나의 이동 로봇 플랫폼으로 연결한 2026 한이음 드림업 개발 프로젝트입니다.</p>
+            <div class="status-note"><strong>보고서 기반 범위</strong><span>프로젝트 서사와 시각 자료는 개발보고서에 근거하며, 접근할 수 없는 저장소 링크는 표시하지 않습니다.</span></div>
+            <div class="tag-row"><span>자율주행</span><span>Customarm</span><span>이동 로보틱스</span><span>환경 AI</span></div>
+            <div class="project-links"><a class="case-link" href="/ko/projects/eco-rover/">사례 자세히 보기 →</a></div>
+          </div>
+          <div class="project-mini-visual report-visual">
+            <span class="mini-kicker">시스템 통합 사례</span>
+            <img src="/assets/reports/eco-rover-report-cover.png" alt="Eco-Rover 2026 개발보고서 표지" />
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="research-ledger section-shell reveal" aria-labelledby="research-ledger-title">
+      <div><p class="section-index">연구 기록 / 2025—2026</p><h2 id="research-ledger-title">접근 가능한 플랫폼에서 현장형 시스템까지.</h2></div>
+      <div class="ledger-list">
+        <article><time>2025</time><div><h3>Tickle Bot</h3><p>공개 데모와 프로젝트 보고서로 뒷받침되는, Physical AI 실험의 진입 장벽을 낮추기 위한 학술대회 연구입니다.</p></div></article>
+        <article><time>2026</time><div><h3>로봇 학습 & Customarm</h3><p>비표준 로봇 형태를 위한 텔레오퍼레이션, 운동학, 시뮬레이션, 안전, 학습 데이터 흐름을 구축합니다.</p></div></article>
+        <article><time>2026</time><div><h3>드론 점검</h3><p>Isaac Sim 합성 데이터, 비전 모델, 엣지 추론, 위치 추정과 단계적 실물 검증 로드맵을 연결합니다.</p></div></article>
+        <article><time>2026</time><div><h3>Eco-Rover</h3><p>자율주행, 환경 인지, 수거 동작, Customarm 작업을 공공 환경 활용 사례로 통합한 이동 로봇 플랫폼입니다.</p></div></article>
+      </div>
+    </section>
+
+    <section id="publication" class="publication-wrap">
+      <div class="section-shell publication-inner reveal">
+        <div class="publication-label"><span>02</span> Publication</div>
+        <div class="publication-main">
+          <p class="pub-type">학술대회 논문 · KIIS 추계학술대회 2025</p>
+          <h2>Tickle Bot: 저가형 Physical AI 연구 플랫폼</h2>
+          <p class="pub-authors">Wook Ko · <strong>이동제</strong> · Yoonchang Choi · Heejae Jung · Seojeong Park</p>
+          <div class="pub-meta"><span>🏆 우수논문상</span><span>Physical AI</span><span>저비용 로보틱스</span></div>
+        </div>
+        <a class="publication-link" href="https://kiis.or.kr/conf/2025f/SessionPaperList.asp?code=47" target="_blank" rel="noreferrer" aria-label="Tickle Bot 학술대회 정보 보기">↗</a>
+      </div>
+    </section>
+
+    <section id="product" class="section-shell section-block">
+      <div class="section-heading reveal">
+        <div>
+          <p class="section-index">03 / 제품 & 엔지니어링</p>
+          <h2>연구뿐 아니라<br />실제 제품도 만듭니다.</h2>
+        </div>
+        <p class="section-intro">로보틱스와 연결된 소프트웨어 제품도 구축하고 운영합니다. 이 작업은 연구 프로젝트와 구분해 소개합니다.</p>
+      </div>
+
+      <article class="product-card reveal">
+        <div class="browser-mockup" aria-label="Revive 로보틱스 website representation">
+          <div class="browser-bar"><span></span><span></span><span></span><p>revive-robotics.onrender.com</p></div>
+          <div class="browser-body">
+            <div class="revive-brand"><i>R</i><span>REVIVE<br />ROBOTICS</span></div>
+            <h3>로보틱스 하드웨어에<br />두 번째 생명을.</h3>
+            <div class="browser-stats"><span>로보틱스 Hardware</span><span>Web Platform</span><span>Deployed Service</span></div>
+          </div>
+        </div>
+        <div class="product-copy">
+          <p class="eyebrow">배포된 제품</p>
+          <h3>Revive 로보틱스</h3>
+          <p>로보틱스 하드웨어 접근성을 높이는 실용적인 웹 서비스와 제품 흐름을 중심으로 직접 운영하는 플랫폼입니다.</p>
+          <ul>
+            <li>공개 배포된 웹 서비스</li>
+            <li>로보틱스 도메인 제품 아키텍처</li>
+            <li>비공개 프로덕션 소스 저장소</li>
+          </ul>
+          <a class="button button-dark" href="https://revive-robotics.onrender.com/" target="_blank" rel="noreferrer">라이브 사이트 방문 ↗</a>
+        </div>
+      </article>
+    </section>
+
+    <section id="about" class="about-wrap">
+      <div class="section-shell about-grid">
+        <div class="about-copy reveal">
+          <p class="section-index">04 / 소개</p>
+          <h2>로봇 전체 스택을 다룹니다.</h2>
+          <p>저의 관심은 로봇 학습과 시스템 엔지니어링의 경계에 있습니다. 정책 학습 방식뿐 아니라 로봇 형태, 제어 인터페이스, 데이터 품질, 시뮬레이션 충실도, 배포 제약도 중요하게 봅니다.</p>
+          <p>특히 커스텀 로봇 플랫폼에서의 매니퓰레이션, 체화형 AI, VLA 모델, 합성 데이터, Sim-to-Real 평가에 관심이 있습니다.</p>
+        </div>
+        <div class="about-details reveal">
+          <div class="detail-group">
+            <p class="detail-label">교육</p>
+            <h3>Soongsil University</h3>
+            <p>물리학 전공<br />차세대반도체공학 복수전공</p>
+          </div>
+          <div class="detail-group">
+            <p class="detail-label">수상</p>
+            <figure class="award-evidence">
+              <a class="award-evidence-image" href="/assets/2024_2_%EC%9A%B0%EC%88%98%EC%83%81/9.%EC%8B%9C%EC%8A%A4%ED%85%9CSW_%ED%8F%B0%EB%85%B8%EC%9D%B4%EB%A7%8C.jpg" target="_blank" rel="noreferrer" aria-label="2024 차세대반도체 경진대회 포스터 원본 열기">
+                <img src="/assets/2024_2_%EC%9A%B0%EC%88%98%EC%83%81/9.%EC%8B%9C%EC%8A%A4%ED%85%9CSW_%ED%8F%B0%EB%85%B8%EC%9D%B4%EB%A7%8C.jpg" alt="2024 차세대반도체학과 경진대회 정보 비대칭 해소를 위한 사고예방 BMS 프로젝트 포스터" loading="lazy" decoding="async" />
+              </a>
+              <figcaption>
+                <span>2024 · 차세대반도체학과 경진대회</span>
+                <h3>우수상</h3>
+                <p>정보 비대칭을 줄이기 위해 설계한 사고예방 배터리 관리 시스템입니다.</p>
+                <div class="award-evidence-links">
+                  <a href="/assets/2024_2_%EC%9A%B0%EC%88%98%EC%83%81/9.%EC%8B%9C%EC%8A%A4%ED%85%9CSW_%ED%8F%B0%EB%85%B8%EC%9D%B4%EB%A7%8C.jpg" target="_blank" rel="noreferrer">포스터 보기 ↗</a>
+                  <a href="/assets/2024_2_%EC%9A%B0%EC%88%98%EC%83%81/%EC%8B%9C%EC%8A%A4%ED%85%9Csw_%ED%8F%B0%EB%85%B8%EC%9D%B4%EB%A7%8C_BMS.pptx.pdf" target="_blank" rel="noreferrer">프로젝트 자료 ↗</a>
+                </div>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="detail-group">
+            <p class="detail-label">연구 스택</p>
+            <div class="stack-list">
+              <span>로봇 학습 <b>LeRobot · ACT · VLA · PyTorch</b></span>
+              <span>시뮬레이션 <b>Isaac Sim · MuJoCo</b></span>
+              <span>로보틱스 <b>ROS2 · URDF · IK</b></span>
+              <span>배포 <b>Jetson · TensorRT · PX4</b></span>
+              <span>비전 <b>OpenCV · YOLO · RGB-D</b></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer section-shell">
+    <div>
+      <p class="footer-title">이동제</p>
+      <p>로보틱스 · 체화형 AI · 로봇 학습</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/dingdongdengdong" target="_blank" rel="noreferrer">GitHub ↗</a>
+      <a href="#top">맨 위로 ↑</a>
+    </div>
+    <p class="footer-note">보여주기보다 연구를 위해 만들었습니다.</p>
+  </footer>
+
+  <script type="module" src="/assets/robot/urdf-hero.bundle.js?v=20260901-4"></script>
+  <script src="/script.js?v=20260901-1"></script>
+</body>
+</html>

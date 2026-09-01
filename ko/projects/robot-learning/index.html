@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="사례 연구: 커스텀 5-DoF 로봇 팔을 위한 Quest 2 텔레오퍼레이션, 기구학, 안전, Le로봇 통합." />
+  <meta name="theme-color" content="#f4f4ef" />
+  <title>커스텀 로봇 학습 플랫폼 — 이동제</title>
+  <link rel="alternate" hreflang="ko" href="/ko/projects/robot-learning/" />
+  <link rel="alternate" hreflang="en" href="/projects/robot-learning/" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/styles.css?v=20260901-1" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+  <div class="noise" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="/ko/#top" aria-label="이동제 홈"><span class="brand-mark">DL</span><span class="brand-name">이동제</span></a>
+    <nav class="nav" aria-label="주요 메뉴"><a href="/ko/#research" aria-current="page">연구</a><a href="/ko/#publication">논문</a><a href="/ko/#product">제품</a><a href="/ko/#about">소개</a></nav>
+    <div class="header-actions"><a class="nav-cta" href="https://github.com/dingdongdengdong" target="_blank" rel="noreferrer">GitHub ↗</a><a class="language-link" href="/projects/robot-learning/" lang="en" hreflang="en" aria-label="View in English">EN</a></div>
+  </header>
+
+  <main id="main-content" class="case-study">
+    <section class="case-hero section-shell reveal">
+      <div class="case-breadcrumb"><a href="/ko/#research">주요 연구</a><span>/</span><span>01</span></div>
+      <div class="case-hero-grid">
+        <div>
+          <div class="case-status"><span class="status status-current">진행 중인 연구</span><span>2026</span></div>
+          <h1>커스텀 로봇<br /><span>학습 플랫폼</span></h1>
+          <p class="case-lede">Meta Quest 2로 커스텀 5-DoF 팔을 제어하고, 실제 모터 통합 전에 기구학과 안전을 검증하며, Le로봇 데이터 수집을 준비하는 하드웨어 중심 워크플로입니다.</p>
+          <div class="case-actions"><a class="button button-dark" href="https://github.com/dingdongdengdong/robot_arm_vr" target="_blank" rel="noreferrer">텔레오퍼레이션 소스 ↗</a><a class="button button-ghost" href="https://github.com/dingdongdengdong/superarm_ws" target="_blank" rel="noreferrer">통합 문서 ↗</a></div>
+        </div>
+        <dl class="case-summary" aria-label="프로젝트 요약">
+          <div><dt>주제</dt><dd>텔레오퍼레이션, 기구학, 안전, 로봇 학습</dd></div>
+          <div><dt>로봇 형태</dt><dd>RoboParty 5-DoF 팔 + AmazingHand</dd></div>
+          <div><dt>인터페이스</dt><dd>Quest 2 WebXR, HTTPS, WebSocket</dd></div>
+          <div><dt>현재 범위</dt><dd>모터 백엔드와 학습 정책 배포는 아직 완료되지 않음</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="case-band">
+      <div class="section-shell metric-grid reveal">
+        <div class="metric-card"><strong>90.1 Hz</strong><span>Quest 2 입력 주기 중앙값</span><small>9,990 프레임 분석</small></div>
+        <div class="metric-card"><strong>0.027 ms</strong><span>문서화된 IK 계산 시간</span><small>Placo 기반 솔버</small></div>
+        <div class="metric-card"><strong>0.09 mm</strong><span>시뮬레이션 궤적 오차 p95</span><small>기구학 검증</small></div>
+        <div class="metric-card"><strong>30</strong><span>문서화된 안전 테스트</span><small>모터 통합 이전</small></div>
+      </div>
+    </section>
+
+    <section class="case-section section-shell">
+      <div class="case-section-heading reveal"><p class="section-index">01 / 문제</p><h2>커스텀 로봇 형태는 범용 학습 스택의 기본 가정을 벗어납니다.</h2></div>
+      <div class="case-two-column reveal">
+        <p class="case-emphasis">이 로봇은 비표준 5관절 팔, 덱스터러스 핸드, 제한된 자세 자유도, 그리고 아직 완성되지 않은 Le로봇 호환 제어 경로를 결합합니다.</p>
+        <div class="case-prose"><p>따라서 첫 번째 엔지니어링 문제는 정책 학습이 아닙니다. 로봇 모델, 관절 한계, 작업공간, 시각화, 향후 데이터셋 스키마의 일관성을 유지하면서 사람의 움직임을 제한된 로봇 명령으로 안전하게 변환하는 경로를 만드는 것입니다.</p><p>프로젝트는 모터 없이 각 경계를 먼저 검증합니다. 모터 모델, CAN 인터페이스, 관절 방향, 영점 오프셋이 확인될 때까지 실물 제어는 차단합니다.</p></div>
+      </div>
+    </section>
+
+    <section class="case-section section-shell">
+      <div class="case-section-heading reveal"><p class="section-index">02 / 시스템</p><h2>WebXR 입력에서 안전 게이트를 거친 로봇 명령까지 하나의 경로로 연결합니다.</h2></div>
+      <div class="architecture architecture-dark reveal" aria-label="로봇 학습 시스템 아키텍처">
+        <div><b>Quest 2</b><span>6-DoF 자세 + 조작</span></div><i>→</i><div><b>좌표 변환</b><span>프레임 매핑 + 클러치</span></div><i>→</i><div><b>IK</b><span>관절 한계 + 도달 가능 자세</span></div><i>→</i><div><b>안전</b><span>속도, 마진, 워치독</span></div><i>→</i><div><b>로봇</b><span>모터 백엔드 미완료</span></div>
+        <div class="architecture-branch"><span>URDF 기반 설정</span><span>웹 대시보드</span><span>Le로봇 dataset path</span></div>
+      </div>
+      <div class="evidence-grid">
+        <article class="evidence-card reveal"><span>01</span><h3>로봇 형태 configuration</h3><p>관절 한계, 작업공간, 홈 자세, 스케일, 툴 프레임을 여러 곳에 중복하지 않고 등록된 URDF에서 하나의 설정으로 생성합니다.</p></article>
+        <article class="evidence-card reveal"><span>02</span><h3>조작자 매핑</h3><p>Grip은 클러치, Trigger는 그립, 컨트롤러 자세는 말단 목표로 사용합니다. 명시적인 리셋과 yaw 조작으로 위험한 미러 매핑을 피합니다.</p></article>
+        <article class="evidence-card reveal"><span>03</span><h3>안전 boundary</h3><p>소프트 스타트, 속도 제한, 관절 한계 마진, 명령 편차 검사, 0.5초 워치독, 트립 상태 고정이 미완성 모터 백엔드 앞단에 위치합니다.</p></article>
+      </div>
+    </section>
+
+    <section class="case-section section-shell">
+      <div class="case-section-heading reveal"><p class="section-index">03 / 엔지니어링 근거</p><h2>완성된 정책이 아니라 측정된 동작을 제시합니다.</h2></div>
+      <div class="figure-grid">
+        <figure class="technical-figure reveal"><img src="/assets/robot-learning/arm-joint-structure.png" alt="커스텀 로봇 팔의 관절 구조 주석 이미지" /><figcaption><b>관절 구조.</b> 기구학 모델 구성에 사용한 5관절 체인과 툴 프레임 형상.</figcaption></figure>
+        <figure class="technical-figure reveal"><img src="/assets/robot-learning/body-iso-reach.png" alt="로봇 body render showing the arm reach envelope" /><figcaption><b>도달 범위 검토.</b> 로봇 render used to reason about embodiment geometry and reachable operating space.</figcaption></figure>
+      </div>
+      <div class="decision-table reveal" role="table" aria-label="엔지니어링 결정">
+        <div class="table-row table-head" role="row"><span role="columnheader">제약</span><span role="columnheader">결정</span><span role="columnheader">이유</span></div>
+        <div class="table-row" role="row"><span role="cell">자세 자유도가 제한된 5관절</span><span role="cell">단순한 접근 형상의 작업부터 시작</span><span role="cell">임의 손목 자세가 필요한 작업을 피함</span></div>
+        <div class="table-row" role="row"><span role="cell">WebXR은 보안 컨텍스트가 필요</span><span role="cell">자체 서명 로컬 HTTPS</span><span role="cell">브라우저 기반 헤드셋 접근 유지</span></div>
+        <div class="table-row" role="row"><span role="cell">모터 인터페이스 미검증</span><span role="cell">안전과 IK를 로컬에 유지하고 Mock 백엔드 사용</span><span role="cell">소프트웨어 진행이 실물 안전 준비 완료로 오해되지 않도록 함</span></div>
+      </div>
+    </section>
+
+    <section class="case-section case-status-section">
+      <div class="section-shell">
+        <div class="case-section-heading reveal"><p class="section-index">04 / 상태</p><h2>현재 동작하는 것과 아직 동작하지 않는 것을 구분합니다.</h2></div>
+        <div class="status-columns reveal">
+          <div><h3>검증 완료</h3><ul class="check-list"><li>Quest 컨트롤러 및 핸드 트래킹 입력</li><li>좌표 변환과 클러치 동작</li><li>URDF 기반 설정과 IK</li><li>대시보드와 가상 로봇 시각화</li><li>안전-layer behavior with a mock motor backend</li></ul></div>
+          <div><h3>남은 과제</h3><ul class="open-list"><li>검증된 모터 모델, CAN 인터페이스, 방향, 영점 오프셋</li><li>프로덕션 백엔드를 통한 실물 팔 구동</li><li>Le로봇 episode collection on the final embodiment</li><li>ACT 또는 VLA 학습과 실물 정책 평가</li></ul></div>
+        </div>
+      </div>
+    </section>
+
+    <nav class="case-pagination section-shell" aria-label="Project navigation"><a href="/ko/#research"><span>전체 프로젝트</span><b>← 연구 목록</b></a><a href="/ko/projects/tickle-bot/"><span>다음 사례</span><b>Tickle Bot →</b></a></nav>
+  </main>
+
+  <footer class="site-footer section-shell"><div><p class="footer-title">이동제</p><p>로보틱스 · 체화형 AI · 로봇 학습</p></div><div class="footer-links"><a href="https://github.com/dingdongdengdong" target="_blank" rel="noreferrer">GitHub ↗</a><a href="/ko/#top">홈 ↑</a></div><p class="footer-note">근거를 우선하고, 진행 중인 작업은 명확히 표시합니다.</p></footer>
+  <script src="/script.js?v=20260901-1"></script>
+</body>
+</html>
