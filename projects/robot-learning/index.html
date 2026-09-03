@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Case study: Echo Flow Lite, Quest 2 teleoperation, and the evolution from a 3-axis AmazingHand V1 to a 5-axis two-finger-gripper V2." />
+  <meta name="description" content="Detailed case study of Echo Flow Lite: custom robot hardware, Quest 2 teleoperation, synchronized LeRobot demonstrations, flow-matching policy design, and simulation-to-real validation." />
   <meta name="theme-color" content="#f4f4ef" />
   <title>Custom Robot Learning Platform — Dongje Lee</title>
   <link rel="alternate" hreflang="en" href="/projects/robot-learning/" />
   <link rel="alternate" hreflang="ko" href="/ko/projects/robot-learning/" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="/styles.css?v=20260903-3" />
+  <link rel="stylesheet" href="/styles.css?v=20260903-4" />
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -25,83 +25,128 @@
       <div class="case-breadcrumb"><a href="/#research">Selected research</a><span>/</span><span>01</span></div>
       <div class="case-hero-grid">
         <div>
-          <div class="case-status"><span class="status status-current">Current research</span><span>2026</span></div>
+          <div class="case-status"><span class="status status-current">Research in progress</span><span>2026</span></div>
           <h1>Custom Robot<br /><span>Learning Platform</span></h1>
-          <p class="case-lede">The current V2 combines five Damiao DM-J4340P joint actuators and a Feetech STS3215 parallel two-finger gripper with the Echo Flow Lite learning architecture first developed for the 3-axis, AmazingHand-equipped V1.</p>
-          <div class="case-actions"><a class="button button-dark" href="https://github.com/dingdongdengdong/robot_arm_vr" target="_blank" rel="noreferrer">Teleoperation source ↗</a><a class="button button-ghost" href="https://github.com/dingdongdengdong/superarm_ws" target="_blank" rel="noreferrer">Integration notes ↗</a><a class="button button-ghost" href="https://arxiv.org/abs/2606.27163" target="_blank" rel="noreferrer">LeHome reference ↗</a></div>
+          <p class="case-lede">A hardware-to-policy research platform for studying how demonstrations collected through VR teleoperation can become closed-loop manipulation behavior on a custom robot.</p>
+          <div class="case-actions"><a class="button button-dark" href="https://github.com/dingdongdengdong/robot_arm_vr" target="_blank" rel="noreferrer">Teleoperation source ↗</a><a class="button button-ghost" href="https://github.com/dingdongdengdong/superarm_ws" target="_blank" rel="noreferrer">Integration notes ↗</a><a class="button button-ghost" href="https://arxiv.org/abs/2606.27163" target="_blank" rel="noreferrer">Research reference ↗</a></div>
         </div>
         <dl class="case-summary" aria-label="Project summary">
+          <div><dt>Research question</dt><dd>Can a compact policy learn a reliable cube-lift skill from synchronized dual-camera demonstrations?</dd></div>
+          <div><dt>Embodiment</dt><dd>V1: 3-axis + AmazingHand → V2: 5-axis + parallel two-finger gripper</dd></div>
           <div><dt>Policy</dt><dd>Echo Flow Lite, a custom LeRobot flow-matching policy</dd></div>
-          <div><dt>Embodiment</dt><dd>V1: 3-axis + AmazingHand → V2: 5-axis + two-finger gripper</dd></div>
-          <div><dt>Observation</dt><dd>Front RGB + wrist RGB + measured joint state</dd></div>
-          <div><dt>Current boundary</dt><dd>V2 dataset collection, checkpoint training, and real-robot rollout remain unfinished</dd></div>
+          <div><dt>Proof boundary</dt><dd>V1 collection stack and policy contracts are implemented; V2 data, checkpoint, and physical rollout remain open</dd></div>
         </dl>
       </div>
     </section>
 
+    <section class="case-cover section-shell reveal" aria-label="Project visual overview">
+      <figure class="case-cover-figure">
+        <img src="/assets/robot-learning/arm-joint-structure.png" alt="Technical comparison of the three-axis prototype and five-axis arm kinematic chains" />
+        <figcaption><span>01 / EMBODIMENT STUDY</span><b>From a working three-axis prototype to the five-axis V2 kinematic chain.</b><p>This orientation handoff separates revolute joints from fixed camera and tool mounts. It is an engineering diagram, not a finished V2 product render.</p></figcaption>
+      </figure>
+      <aside class="build-ledger" aria-label="Current build ledger">
+        <p class="detail-label">Current build ledger</p>
+        <div><span>V1</span><b>3 controlled arm axes</b><small>AmazingHand · Quest 2 · dual RGB</small></div>
+        <div><span>V2</span><b>5 DM-J4340P axes</b><small>STS3215 parallel gripper · yaw-180 model</small></div>
+        <div><span>Learning</span><b>15-step action chunks</b><small>execute 3, then observe and replan</small></div>
+        <p class="build-note">The portfolio home still labels the displayed AmazingHand URDF as an earlier prototype; it will not be presented as the V2 robot.</p>
+      </aside>
+    </section>
+
     <section class="case-band">
       <div class="section-shell metric-grid reveal">
-        <div class="metric-card"><strong>90.1 Hz</strong><span>median Quest 2 input rate</span><small>9,990 frames analyzed</small></div>
-        <div class="metric-card"><strong>0.027 ms</strong><span>documented IK solve time</span><small>Placo-based solver</small></div>
-        <div class="metric-card"><strong>0.09 mm</strong><span>p95 simulated trajectory error</span><small>kinematic validation</small></div>
-        <div class="metric-card"><strong>30</strong><span>safety tests documented</span><small>before motor integration</small></div>
+        <div class="metric-card"><strong>90.1 Hz</strong><span>median Quest input rate</span><small>9,990 frames analyzed</small></div>
+        <div class="metric-card"><strong>15 Hz</strong><span>synchronized dataset rate</span><small>two images + state + action</small></div>
+        <div class="metric-card"><strong>15 → 3</strong><span>predict then replan</span><small>short-horizon feedback execution</small></div>
+        <div class="metric-card"><strong>18 / 20</strong><span>planned simulation gate</span><small>required before bulk synthetic data</small></div>
       </div>
     </section>
 
     <section class="case-section section-shell">
-      <div class="case-section-heading reveal"><p class="section-index">01 / Problem</p><h2>A custom embodiment breaks the assumptions of an off-the-shelf learning stack.</h2></div>
+      <div class="case-section-heading reveal"><p class="section-index">01 / Research direction</p><h2>The project is not just an arm—it is a controlled path from human demonstration to physical action.</h2></div>
       <div class="case-two-column reveal">
-        <p class="case-emphasis">V2 combines a non-standard five-axis arm, a two-finger gripper, constrained orientation freedom, and hardware that does not yet expose a complete LeRobot-compatible control path.</p>
-        <div class="case-prose"><p>The first engineering problem is therefore not policy training. It is creating a trustworthy path from human motion to bounded robot commands while keeping the robot model, joint limits, workspace, visualization, and future dataset schema consistent.</p><p>The project deliberately validates each boundary without motors first. Physical control remains blocked until motor model, CAN interface, joint signs, and zero offsets are verified.</p></div>
+        <p class="case-emphasis">A learned policy is only useful when the robot model, observations, action definition, controller ownership, and safety state all describe the same physical system.</p>
+        <div class="case-prose"><p>Off-the-shelf learning examples assume a supported robot, stable cameras, a known gripper, and a ready dataset interface. This project starts from the opposite condition: a custom embodiment whose mechanics and software contract must be established together.</p><p>The first target is intentionally narrow—see a cube, approach it, enclose it, lift it by at least 5 cm, and hold it for at least 0.5 seconds. A narrow task makes synchronization errors, unreachable poses, weak grasps, and unsafe command transitions measurable instead of hiding them behind a general “robot AI” claim.</p></div>
+      </div>
+      <div class="research-question-grid">
+        <article><span>01</span><h3>Embodiment</h3><p>Keep URDF joints, limits, tool frames, camera mounts, and policy dimensions under one versioned contract.</p></article>
+        <article><span>02</span><h3>Demonstration</h3><p>Record what the robot actually sensed and measured—not simulation-only state or a commanded pose disguised as feedback.</p></article>
+        <article><span>03</span><h3>Learning</h3><p>Predict a short future while repeatedly returning to fresh images and measured joint state.</p></article>
+        <article><span>04</span><h3>Deployment</h3><p>Place teleoperation and policy commands behind one fail-closed authority boundary before motors.</p></article>
       </div>
     </section>
 
     <section class="case-section section-shell">
-      <div class="case-section-heading reveal"><p class="section-index">02 / System</p><h2>One path from WebXR input to a safety-gated robot action.</h2></div>
-      <div class="architecture architecture-dark reveal" aria-label="Robot learning system architecture">
-        <div><b>Quest 2</b><span>6-DoF pose + controls</span></div><i>→</i><div><b>Transform</b><span>frame mapping + clutch</span></div><i>→</i><div><b>IK</b><span>limits + reachable pose</span></div><i>→</i><div><b>Safety</b><span>rate, margin, watchdog</span></div><i>→</i><div><b>Robot</b><span>motor backend pending</span></div>
-        <div class="architecture-branch"><span>URDF-derived configuration</span><span>Web dashboard</span><span>Echo Flow Lite dataset → policy path</span></div>
+      <div class="case-section-heading reveal"><p class="section-index">02 / Hardware evolution</p><h2>V1 proves the path. V2 expands the robot contract without pretending the new rollout is complete.</h2></div>
+      <div class="version-grid reveal">
+        <article class="version-card"><div class="version-top"><span>V1 · validated foundation</span><b>3-axis + AmazingHand</b></div><p>The first working stack maps Quest motion through IK and safety to J1/J2/J3, records front and wrist RGB, and uses an AmazingHand grasp command as the fourth action value.</p><ul><li>Three measured DM motor joint angles</li><li>AmazingHand command without fabricated hand-state feedback</li><li>Quest clutch, trigger, reset, and HOLD behavior</li><li>15 Hz LeRobot episode recorder</li></ul></article>
+        <article class="version-card version-card-current"><div class="version-top"><span>V2 · current build</span><b>5-axis + two-finger gripper</b></div><p>V2 keeps the learning direction while expanding the embodiment to five Damiao DM-J4340P joints and a Feetech STS3215 parallel gripper.</p><ul><li><code>arm_v2_yaw180_ik.urdf</code> for Placo IK</li><li>Visual URDF retains the gripper mechanism</li><li>Yaw-180 neutral aligns cable-safe J1 with zero</li><li>Physical signs, gains, offsets, and gripper range still require calibration</li></ul></article>
       </div>
+      <div class="figure-grid figure-grid-balanced">
+        <figure class="technical-figure reveal"><img src="/assets/robot-learning/arm-joint-structure.png" alt="Joint-axis and link-chain analysis for the three-axis prototype and five-axis target arm" /><figcaption><b>Kinematic handoff.</b> The diagram documents the three-axis prototype alongside the full five-joint chain and distinguishes fixed camera/tool mounts from actuated joints.</figcaption></figure>
+        <figure class="technical-figure reveal"><img src="/assets/robot-learning/body-iso-reach.png" alt="Earlier mobile robot integration render with the arm near a work surface" /><figcaption><b>Earlier integration study.</b> This V1-era render was used to inspect mounting, reach, occlusion, and access around a work surface. It is retained as process evidence, not labeled as the final V2 body.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="case-section section-shell">
+      <div class="case-section-heading reveal"><p class="section-index">03 / Teleoperation &amp; safety</p><h2>Quest and the learned policy never compete for the same physical connection.</h2></div>
+      <figure class="diagram-figure reveal"><a class="diagram-scroll" href="/assets/robot-learning/safety-authority-mux.svg" target="_blank" rel="noreferrer" aria-label="Open the command-authority diagram at full size"><img src="/assets/robot-learning/safety-authority-mux.svg" alt="Diagram showing Quest and Echo Flow Lite commands passing through a single authority mux before the physical bridge" /></a><figcaption><b>Single-owner command authority.</b> TELEOP and POLICY are explicit modes. Every transfer passes through an acknowledged measured-position HOLD; stale data, a missed heartbeat, malformed values, or a disconnect return to HOLD rather than silently switching producers. <a href="/assets/robot-learning/safety-authority-mux.svg" target="_blank" rel="noreferrer">Open full size ↗</a></figcaption></figure>
       <div class="evidence-grid">
-        <article class="evidence-card reveal"><span>01</span><h3>Embodiment configuration</h3><p>Joint limits, workspace, home pose, scale, and tool frames come from the V2 URDF contract. The yaw-180 configuration aligns the cable-safe neutral with J1 = 0.</p></article>
-        <article class="evidence-card reveal"><span>02</span><h3>Operator mapping</h3><p>Grip acts as a clutch, trigger controls the gripper, controller pose supplies the end-effector target, and explicit reset and yaw controls avoid unsafe mirrored mappings.</p></article>
-        <article class="evidence-card reveal"><span>03</span><h3>Safety boundary</h3><p>Soft start, velocity limiting, joint-limit margins, command divergence checks, a 0.5-second watchdog, and trip-state freezing sit ahead of the unfinished motor backend.</p></article>
+        <article class="evidence-card reveal"><span>INPUT</span><h3>WebXR mapping</h3><p>Right-controller pose supplies the end-effector target. Grip acts as a clutch, trigger controls grasp, and explicit home/HOLD controls avoid unintended motion when tracking begins.</p></article>
+        <article class="evidence-card reveal"><span>CONTROL</span><h3>IK + bounded motion</h3><p>Targets pass through workspace, joint-limit, velocity, divergence, and watchdog checks. The model never writes directly to CAN motors.</p></article>
+        <article class="evidence-card reveal"><span>FAIL SAFE</span><h3>HOLD before fallback</h3><p>Loss of state, images, chunks, heartbeat, timing, or connectivity freezes new tracking. A TRIP remains a manual-clear condition.</p></article>
       </div>
     </section>
 
     <section class="case-section section-shell">
-      <div class="case-section-heading reveal"><p class="section-index">03 / Model and versions</p><h2>The learning model stays; the robot contract evolves.</h2></div>
-      <div class="case-two-column reveal">
-        <p class="case-emphasis">Echo Flow Lite is a compact project-specific LeRobot policy: two camera views and joint state are encoded into spatial tokens, and a transformer reconstructs short action chunks through flow matching.</p>
-        <div class="case-prose"><p>The implementation uses a shared ResNet18 image encoder for the front and wrist cameras, adds camera identity, spatial position, and robot-state tokens, then predicts absolute joint-and-gripper actions with a flow-matching decoder.</p><p>The architecture is inspired by the LeHome Challenge 2026 solution, especially its flow-matching, AWR/RECAP, DAgger, and sim-to-real direction. It is not the complete LeHome, π0.5, or OpenPI system and contains no language model.</p><a class="detail-link" href="https://arxiv.org/abs/2606.27163" target="_blank" rel="noreferrer">Reference: Learning to Fold — LeHome Challenge 2026 ↗</a></div>
+      <div class="case-section-heading reveal"><p class="section-index">04 / Demonstration data</p><h2>The dataset is a synchronized record of what the robot saw, measured, and was asked to do.</h2></div>
+      <figure class="diagram-figure diagram-figure-light reveal"><a class="diagram-scroll" href="/assets/robot-learning/data-contract.svg" target="_blank" rel="noreferrer" aria-label="Open the dataset-contract diagram at full size"><img src="/assets/robot-learning/data-contract.svg" alt="LeRobot dataset diagram with front and wrist images, measured joint state, action, and episode labels" /></a><figcaption><b>Dataset contract.</b> Front RGB, wrist RGB, measured joints, operator actions, task text, and episode outcome share one 15 Hz timeline. Complete episodes—not random frames—define train, validation, and test splits. <a href="/assets/robot-learning/data-contract.svg" target="_blank" rel="noreferrer">Open full size ↗</a></figcaption></figure>
+      <div class="dataset-field-grid reveal">
+        <article><span>Observation / vision</span><b>Front RGB + wrist RGB</b><p>The front view captures global workspace context; the wrist view preserves the near-field relationship between gripper and object.</p></article>
+        <article><span>Observation / state</span><b>Measured joint feedback</b><p>CAN feedback represents the robot state. A command is never copied into observation as if the mechanism had already reached it.</p></article>
+        <article><span>Action</span><b>Joint targets + grasp</b><p>V1 records J1/J2/J3 plus grasp. V2 expands this interface to five arm axes and the parallel-gripper command.</p></article>
+        <article><span>Episode quality</span><b>Motion, view, reset, outcome</b><p>Stationary, occluded, collided, or poorly reset episodes are rejected or preserved separately as failures—not relabeled as good demonstrations.</p></article>
       </div>
-      <div class="evidence-grid">
-        <article class="evidence-card reveal"><span>V1</span><h3>3-axis + AmazingHand</h3><p>The first contract consumes two RGB views and three measured joint angles, then predicts J1/J2/J3 and an AmazingHand grasp command.</p></article>
-        <article class="evidence-card reveal"><span>CORE</span><h3>Echo Flow Lite</h3><p>The shared dual-camera encoder, spatial/state tokens, transformer, and flow-matching action decoder remain the common learning architecture.</p></article>
-        <article class="evidence-card reveal"><span>V2</span><h3>5-axis + two-finger gripper</h3><p>The current version uses five DM-J4340P actuators and an STS3215 parallel gripper. Placo uses <code>arm_v2_yaw180_ik.urdf</code>, while visualization retains the original gripper model.</p></article>
+      <div class="stage-grid reveal">
+        <article><span>A</span><h3>Pipeline smoke</h3><strong>20 episodes</strong><p>Verify both cameras, measured state, actions, 15 Hz timing, reset, and finalization before scaling collection.</p></article>
+        <article><span>B</span><h3>First BC candidate</h3><strong>≥100 quality successes</strong><p>A starting target, not a promised success threshold. Preserve deliberate recoveries and failures for later evaluation.</p></article>
+        <article><span>C</span><h3>Fixed evaluation</h3><strong>lift ≥5 cm · hold ≥0.5 s</strong><p>Report approach, enclosure, lift, hold, position-bucket failures, and safety HOLD/TRIP counts.</p></article>
+        <article><span>D</span><h3>Targeted improvement</h3><strong>DAgger + sim-only AWR</strong><p>Collect corrections around repeated failures and promote only when paired fixed-seed evaluation improves without regressions.</p></article>
       </div>
     </section>
 
     <section class="case-section section-shell">
-      <div class="case-section-heading reveal"><p class="section-index">04 / Engineering evidence</p><h2>Measured behavior, not a finished-policy claim.</h2></div>
-      <div class="figure-grid">
-        <figure class="technical-figure reveal"><img src="/assets/robot-learning/arm-joint-structure.png" alt="Annotated joint structure of the custom robot arm" /><figcaption><b>Joint structure.</b> The five-joint chain and tool-frame geometry used to establish the kinematic model.</figcaption></figure>
-        <figure class="technical-figure reveal"><img src="/assets/robot-learning/body-iso-reach.png" alt="Robot body render showing the arm reach envelope" /><figcaption><b>Reach study.</b> The robot render supports analysis of embodiment geometry and reachable operating space.</figcaption></figure>
+      <div class="case-section-heading reveal"><p class="section-index">05 / Echo Flow Lite</p><h2>A compact flow-matching policy built for this robot—not a renamed general-purpose VLA.</h2></div>
+      <figure class="diagram-figure reveal"><a class="diagram-scroll" href="/assets/robot-learning/echo-flow-lite-pipeline.svg" target="_blank" rel="noreferrer" aria-label="Open the Echo Flow Lite architecture diagram at full size"><img src="/assets/robot-learning/echo-flow-lite-pipeline.svg" alt="Echo Flow Lite architecture from dual-camera observations to a flow-matched action chunk" /></a><figcaption><b>Closed-loop action generation.</b> A shared ResNet18 produces spatial tokens for both cameras. Camera identity, image position, robot state, and flow time condition a transformer that reconstructs a 15-target action chunk from noise. Only three targets are executed before observing again. <a href="/assets/robot-learning/echo-flow-lite-pipeline.svg" target="_blank" rel="noreferrer">Open full size ↗</a></figcaption></figure>
+      <div class="case-two-column case-two-column-reset reveal">
+        <p class="case-emphasis">The model borrows the useful flow-matching and sim-to-real direction of the LeHome Challenge work, while deliberately remaining smaller and auditable.</p>
+        <div class="case-prose"><p>During training, the correct action chunk is mixed with Gaussian noise at a sampled flow time. The transformer learns the velocity connecting data to noise. At inference, ten Euler steps reverse that path from noise toward a usable action sequence.</p><p>Optional success and progress heads support later hard-example mining and simulation AWR. Missing labels are masked rather than invented. Echo Flow Lite contains no language model and is not the complete LeHome, π0.5, or OpenPI system.</p><a class="detail-link" href="https://arxiv.org/abs/2606.27163" target="_blank" rel="noreferrer">Reference: Learning to Fold — LeHome Challenge 2026 ↗</a></div>
       </div>
-      <div class="decision-table reveal" role="table" aria-label="Engineering decisions">
-        <div class="table-row table-head" role="row"><span role="columnheader">Constraint</span><span role="columnheader">Decision</span><span role="columnheader">Reason</span></div>
-        <div class="table-row" role="row"><span role="cell">Five orientation-limited joints</span><span role="cell">Begin with simple approach geometries</span><span role="cell">Avoid tasks requiring arbitrary wrist orientation</span></div>
-        <div class="table-row" role="row"><span role="cell">WebXR requires a secure context</span><span role="cell">Self-signed local HTTPS</span><span role="cell">Preserve browser-based headset access</span></div>
-        <div class="table-row" role="row"><span role="cell">Motor interface is unverified</span><span role="cell">Keep safety and IK local; use a mock backend</span><span role="cell">Prevent software progress from implying safe physical readiness</span></div>
+      <div class="model-fact-row reveal"><span><b>Shared encoder</b>ResNet18 spatial feature tokens</span><span><b>Decoder</b>Transformer flow velocity</span><span><b>Inference</b>10 Euler integration steps</span><span><b>Feedback</b>execute 3 / replan at 15 Hz</span></div>
+    </section>
+
+    <section class="case-section section-shell">
+      <div class="case-section-heading reveal"><p class="section-index">06 / Simulation-to-real gates</p><h2>Rendering, contact, and learned behavior are separate claims—and each needs its own test.</h2></div>
+      <div class="proof-gates reveal">
+        <article><span>01</span><h3>Structural proof</h3><p>URDF hierarchy, joints, limits, mass, collisions, tool frames, and camera mounts load as intended.</p><small>Evidence: model inspection + configuration validation</small></article>
+        <article><span>02</span><h3>Mechanical proof</h3><p>A scripted controller approaches, encloses, lifts, and holds the object with stable contact.</p><small>Promotion target: at least 18 successful trials out of 20</small></article>
+        <article><span>03</span><h3>Data proof</h3><p>Images, feedback, actions, timestamps, resets, and outcomes remain synchronized and replayable.</p><small>Evidence: 20-episode collection smoke + inspection</small></article>
+        <article><span>04</span><h3>Behavior proof</h3><p>A frozen policy succeeds on fixed placements and seeds without safety-bucket regression.</p><small>Not yet claimed: no trained V2 checkpoint or rollout rate</small></article>
+      </div>
+      <div class="decision-table reveal" role="table" aria-label="Simulation-to-real decisions">
+        <div class="table-row table-head" role="row"><span role="columnheader">Risk</span><span role="columnheader">Engineering decision</span><span role="columnheader">Why it matters</span></div>
+        <div class="table-row" role="row"><span role="cell">Long open-loop action</span><span role="cell">Execute 3 of 15 predictions, then re-observe</span><span role="cell">Correct after object motion and model error</span></div>
+        <div class="table-row" role="row"><span role="cell">Privileged simulation state</span><span role="cell">Exclude it from deployed observations</span><span role="cell">Keep the training contract available on the physical robot</span></div>
+        <div class="table-row" role="row"><span role="cell">Unmeasured randomization</span><span role="cell">Fill the Isaac configuration from physical measurements</span><span role="cell">Randomize around evidence rather than guesses</span></div>
       </div>
     </section>
 
     <section class="case-section case-status-section">
       <div class="section-shell">
-        <div class="case-section-heading reveal"><p class="section-index">05 / Status</p><h2>What works now, and what does not.</h2></div>
+        <div class="case-section-heading reveal"><p class="section-index">07 / Current status</p><h2>Implemented foundations and open research are shown separately.</h2></div>
         <div class="status-columns reveal">
-          <div><h3>Validated</h3><ul class="check-list"><li>Quest controller and hand-tracking input</li><li>Coordinate transforms and clutch behavior</li><li>V2 yaw-180 URDF configuration and simulated IK</li><li>Dashboard and virtual robot visualization</li><li>Echo Flow Lite V1 plugin and policy smoke tests</li><li>Safety-layer behavior with a mock motor backend</li></ul></div>
-          <div><h3>Still open</h3><ul class="open-list"><li>Physical calibration of joint directions, zero offsets, gains, and gripper range</li><li>Physical V2 arm actuation through the production backend</li><li>LeRobot episode collection with five axes and the two-finger gripper</li><li>Echo Flow Lite V2 checkpoint training and real-robot policy evaluation</li></ul></div>
+          <div><h3>Implemented / checked</h3><ul class="check-list"><li>Quest controller and hand-tracking input path</li><li>Coordinate transforms, clutch, and explicit HOLD behavior</li><li>URDF-driven configuration and simulated IK workflow</li><li>Dual-camera LeRobot dataset recorder and validation gates</li><li>Echo Flow Lite policy/config/processor plugin and smoke tests</li><li>Single-owner command mux and mock-backend safety behavior</li></ul></div>
+          <div><h3>In progress / not yet claimed</h3><ul class="open-list"><li>V2 physical joint signs, zero offsets, gains, and gripper calibration</li><li>Final V2 visual URDF/mesh synchronization for the public portfolio</li><li>Five-axis, two-finger-gripper episode collection</li><li>Echo Flow Lite V2 checkpoint training</li><li>Isaac contact and scripted 18/20 mechanical gate</li><li>Fixed-seed real-robot policy success rate</li></ul></div>
         </div>
       </div>
     </section>

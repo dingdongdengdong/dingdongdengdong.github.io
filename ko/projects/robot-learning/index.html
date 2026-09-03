@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="사례 연구: Echo Flow Lite와 Quest 2 텔레오퍼레이션, 3축 AmazingHand V1에서 5축·2지 그리퍼 V2로의 확장." />
+  <meta name="description" content="Echo Flow Lite 상세 사례 연구: 커스텀 로봇 하드웨어, Quest 2 텔레오퍼레이션, LeRobot 시연 데이터, 플로 매칭 정책, Simulation-to-Real 검증." />
   <meta name="theme-color" content="#f4f4ef" />
   <title>커스텀 로봇 학습 플랫폼 — 이동제</title>
   <link rel="alternate" hreflang="ko" href="/ko/projects/robot-learning/" />
   <link rel="alternate" hreflang="en" href="/projects/robot-learning/" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="/styles.css?v=20260903-3" />
+  <link rel="stylesheet" href="/styles.css?v=20260903-4" />
 </head>
 <body>
   <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
@@ -27,86 +27,131 @@
         <div>
           <div class="case-status"><span class="status status-current">진행 중인 연구</span><span>2026</span></div>
           <h1>커스텀 로봇<br /><span>학습 플랫폼</span></h1>
-          <p class="case-lede">현재 V2는 Damiao DM-J4340P 관절 구동기 5개와 Feetech STS3215 병렬 2지 그리퍼를 사용하며, 3축 팔과 AmazingHand로 구성한 V1에서 개발한 Echo Flow Lite 학습 구조를 이어갑니다.</p>
-          <div class="case-actions"><a class="button button-dark" href="https://github.com/dingdongdengdong/robot_arm_vr" target="_blank" rel="noreferrer">텔레오퍼레이션 소스 ↗</a><a class="button button-ghost" href="https://github.com/dingdongdengdong/superarm_ws" target="_blank" rel="noreferrer">통합 문서 ↗</a><a class="button button-ghost" href="https://arxiv.org/abs/2606.27163" target="_blank" rel="noreferrer">LeHome 참고 논문 ↗</a></div>
+          <p class="case-lede">VR 텔레오퍼레이션으로 수집한 사람의 시연을 커스텀 로봇의 폐루프 조작 행동으로 연결하기 위한 하드웨어–정책 통합 연구 플랫폼입니다.</p>
+          <div class="case-actions"><a class="button button-dark" href="https://github.com/dingdongdengdong/robot_arm_vr" target="_blank" rel="noreferrer">텔레오퍼레이션 소스 ↗</a><a class="button button-ghost" href="https://github.com/dingdongdengdong/superarm_ws" target="_blank" rel="noreferrer">통합 문서 ↗</a><a class="button button-ghost" href="https://arxiv.org/abs/2606.27163" target="_blank" rel="noreferrer">연구 참고 논문 ↗</a></div>
         </div>
         <dl class="case-summary" aria-label="프로젝트 요약">
+          <div><dt>연구 질문</dt><dd>동기화된 듀얼 카메라 시연으로 소형 정책이 안정적인 큐브 리프트를 학습할 수 있는가?</dd></div>
+          <div><dt>로봇 형태</dt><dd>V1: 3축 + AmazingHand → V2: 5축 + 병렬 2지 그리퍼</dd></div>
           <div><dt>정책</dt><dd>커스텀 LeRobot 플로 매칭 정책 Echo Flow Lite</dd></div>
-          <div><dt>로봇 형태</dt><dd>V1: 3축 + AmazingHand → V2: 5축 + 2지 그리퍼</dd></div>
-          <div><dt>관측</dt><dd>전면 RGB + 손목 RGB + 실측 관절 상태</dd></div>
-          <div><dt>현재 범위</dt><dd>V2 데이터 수집, 체크포인트 학습, 실물 롤아웃은 아직 완료되지 않음</dd></div>
+          <div><dt>검증 경계</dt><dd>V1 수집 스택과 정책 인터페이스는 구현했으며, V2 데이터·체크포인트·실물 롤아웃은 진행 중</dd></div>
         </dl>
       </div>
     </section>
 
+    <section class="case-cover section-shell reveal" aria-label="프로젝트 시각 개요">
+      <figure class="case-cover-figure">
+        <img src="/assets/robot-learning/arm-joint-structure.png" alt="3축 프로토타입과 5축 로봇팔의 기구학 체인을 비교한 기술 자료" />
+        <figcaption><span>01 / 로봇 형태 연구</span><b>동작하는 3축 프로토타입에서 V2 5축 기구학 체인으로.</b><p>회전 관절과 고정된 카메라·툴 마운트를 구분한 방향성 인계 자료입니다. 완성된 V2 제품 렌더가 아니라 설계 근거입니다.</p></figcaption>
+      </figure>
+      <aside class="build-ledger" aria-label="현재 개발 기록">
+        <p class="detail-label">현재 개발 기록</p>
+        <div><span>V1</span><b>제어 관절 3축</b><small>AmazingHand · Quest 2 · 듀얼 RGB</small></div>
+        <div><span>V2</span><b>DM-J4340P 기반 5축</b><small>STS3215 병렬 그리퍼 · yaw-180 모델</small></div>
+        <div><span>학습</span><b>15단계 행동 청크</b><small>3단계 실행 후 다시 관측·재계획</small></div>
+        <p class="build-note">홈 화면에 표시되는 AmazingHand URDF는 이전 프로토타입으로 명시했습니다. V2 로봇으로 오인되도록 표시하지 않습니다.</p>
+      </aside>
+    </section>
+
     <section class="case-band">
       <div class="section-shell metric-grid reveal">
-        <div class="metric-card"><strong>90.1 Hz</strong><span>Quest 2 입력 주기 중앙값</span><small>9,990 프레임 분석</small></div>
-        <div class="metric-card"><strong>0.027 ms</strong><span>문서화된 IK 계산 시간</span><small>Placo 기반 솔버</small></div>
-        <div class="metric-card"><strong>0.09 mm</strong><span>시뮬레이션 궤적 오차 p95</span><small>기구학 검증</small></div>
-        <div class="metric-card"><strong>30</strong><span>문서화된 안전 테스트</span><small>모터 통합 이전</small></div>
+        <div class="metric-card"><strong>90.1 Hz</strong><span>Quest 입력 주기 중앙값</span><small>9,990 프레임 분석</small></div>
+        <div class="metric-card"><strong>15 Hz</strong><span>데이터셋 동기화 주기</span><small>영상 2개 + 상태 + 행동</small></div>
+        <div class="metric-card"><strong>15 → 3</strong><span>예측 후 재계획</span><small>짧은 구간만 실행하는 피드백 제어</small></div>
+        <div class="metric-card"><strong>18 / 20</strong><span>계획한 시뮬레이션 게이트</span><small>대규모 합성 데이터 생성 전 기준</small></div>
       </div>
     </section>
 
     <section class="case-section section-shell">
-      <div class="case-section-heading reveal"><p class="section-index">01 / 문제</p><h2>커스텀 로봇 형태는 범용 학습 스택의 기본 가정을 벗어납니다.</h2></div>
+      <div class="case-section-heading reveal"><p class="section-index">01 / 연구 방향</p><h2>단순한 로봇팔 제작이 아니라, 사람의 시연에서 실제 로봇 행동까지 이어지는 제어 가능한 경로를 만듭니다.</h2></div>
       <div class="case-two-column reveal">
-        <p class="case-emphasis">V2는 비표준 5축 팔, 2지 그리퍼, 제한된 자세 자유도, 그리고 아직 완성되지 않은 LeRobot 호환 제어 경로를 결합합니다.</p>
-        <div class="case-prose"><p>따라서 첫 번째 엔지니어링 문제는 정책 학습이 아닙니다. 로봇 모델, 관절 한계, 작업공간, 시각화, 향후 데이터셋 스키마의 일관성을 유지하면서 사람의 움직임을 제한된 로봇 명령으로 안전하게 변환하는 경로를 만드는 것입니다.</p><p>프로젝트는 모터 없이 각 경계를 먼저 검증합니다. 모터 모델, CAN 인터페이스, 관절 방향, 영점 오프셋이 확인될 때까지 실물 제어는 차단합니다.</p></div>
+        <p class="case-emphasis">학습 정책이 의미 있으려면 로봇 모델, 관측, 행동 정의, 명령 권한, 안전 상태가 모두 동일한 물리 시스템을 설명해야 합니다.</p>
+        <div class="case-prose"><p>범용 로봇 학습 예제는 지원되는 로봇, 안정적인 카메라, 정의된 그리퍼, 준비된 데이터 인터페이스를 전제로 합니다. 이 프로젝트는 반대로 커스텀 로봇의 기구와 소프트웨어 인터페이스를 함께 확립하는 단계부터 시작합니다.</p><p>첫 목표는 의도적으로 좁게 설정했습니다. 큐브를 보고 접근하고, 감싼 뒤 5 cm 이상 들어 올려 0.5초 이상 유지합니다. 좁고 측정 가능한 과제를 통해 동기화 오류, 도달 불가능 자세, 약한 파지, 위험한 명령 전환을 막연한 ‘로봇 AI’ 표현 뒤에 숨기지 않습니다.</p></div>
+      </div>
+      <div class="research-question-grid">
+        <article><span>01</span><h3>로봇 형태</h3><p>URDF 관절·한계·툴 프레임·카메라 마운트·정책 차원을 하나의 버전 인터페이스로 관리합니다.</p></article>
+        <article><span>02</span><h3>시연 데이터</h3><p>시뮬레이션 전용 상태나 명령값이 아니라 로봇이 실제로 보고 측정한 값을 기록합니다.</p></article>
+        <article><span>03</span><h3>학습</h3><p>짧은 미래 행동을 예측하고 새로운 영상과 실측 관절 상태를 반복해서 반영합니다.</p></article>
+        <article><span>04</span><h3>실물 배포</h3><p>텔레오퍼레이션과 정책 명령을 모터 앞단의 단일 fail-closed 권한 경계에 둡니다.</p></article>
       </div>
     </section>
 
     <section class="case-section section-shell">
-      <div class="case-section-heading reveal"><p class="section-index">02 / 시스템</p><h2>WebXR 입력에서 안전 게이트를 거친 로봇 명령까지 하나의 경로로 연결합니다.</h2></div>
-      <div class="architecture architecture-dark reveal" aria-label="로봇 학습 시스템 아키텍처">
-        <div><b>Quest 2</b><span>6-DoF 자세 + 조작</span></div><i>→</i><div><b>좌표 변환</b><span>프레임 매핑 + 클러치</span></div><i>→</i><div><b>IK</b><span>관절 한계 + 도달 가능 자세</span></div><i>→</i><div><b>안전</b><span>속도, 마진, 워치독</span></div><i>→</i><div><b>로봇</b><span>모터 백엔드 미완료</span></div>
-        <div class="architecture-branch"><span>URDF 기반 설정</span><span>웹 대시보드</span><span>Echo Flow Lite 데이터셋 → 정책 경로</span></div>
+      <div class="case-section-heading reveal"><p class="section-index">02 / 하드웨어 확장</p><h2>V1으로 전체 경로를 증명하고, 완료되지 않은 V2 실물 롤아웃을 과장하지 않은 채 로봇 인터페이스를 확장합니다.</h2></div>
+      <div class="version-grid reveal">
+        <article class="version-card"><div class="version-top"><span>V1 · 검증 기반</span><b>3축 + AmazingHand</b></div><p>Quest 움직임을 IK와 안전 계층을 거쳐 J1/J2/J3로 전달하고, 전면·손목 RGB 영상과 AmazingHand 파지 명령을 네 번째 행동값으로 기록한 첫 동작 스택입니다.</p><ul><li>DM 모터 3개의 실측 관절각</li><li>가짜 손 상태를 만들지 않는 AmazingHand 명령</li><li>Quest 클러치·트리거·리셋·HOLD 동작</li><li>15 Hz LeRobot 에피소드 기록기</li></ul></article>
+        <article class="version-card version-card-current"><div class="version-top"><span>V2 · 현재 개발</span><b>5축 + 2지 그리퍼</b></div><p>V2는 학습 방향을 유지하면서 Damiao DM-J4340P 관절 5개와 Feetech STS3215 병렬 그리퍼로 로봇 형태를 확장합니다.</p><ul><li>Placo IK용 <code>arm_v2_yaw180_ik.urdf</code></li><li>시각 URDF에는 그리퍼 기구 유지</li><li>케이블 안전 중립 자세를 J1 영점에 맞춘 yaw-180</li><li>실물 부호·게인·오프셋·그리퍼 범위 캘리브레이션 진행 중</li></ul></article>
       </div>
+      <div class="figure-grid figure-grid-balanced">
+        <figure class="technical-figure reveal"><img src="/assets/robot-learning/arm-joint-structure.png" alt="3축 프로토타입과 5축 목표 팔의 관절축 및 링크 체인 분석" /><figcaption><b>기구학 인계 자료.</b> 3축 프로토타입과 전체 5관절 체인을 함께 기록하고, 구동 관절과 고정된 카메라·툴 마운트를 구분합니다.</figcaption></figure>
+        <figure class="technical-figure reveal"><img src="/assets/robot-learning/body-iso-reach.png" alt="작업대 주변에서 로봇팔의 도달 범위를 검토한 이전 이동로봇 통합 렌더" /><figcaption><b>이전 통합 검토.</b> V1 단계에서 장착 위치, 도달 범위, 가림, 작업대 접근성을 확인한 렌더입니다. 최종 V2 본체 이미지가 아니라 개발 과정의 근거로 표시합니다.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="case-section section-shell">
+      <div class="case-section-heading reveal"><p class="section-index">03 / 텔레오퍼레이션과 안전</p><h2>Quest와 학습 정책이 하나의 실물 연결을 동시에 차지하지 않도록 설계했습니다.</h2></div>
+      <figure class="diagram-figure reveal"><a class="diagram-scroll" href="/assets/robot-learning/safety-authority-mux.svg" target="_blank" rel="noreferrer" aria-label="명령 권한 도식을 전체 크기로 열기"><img src="/assets/robot-learning/safety-authority-mux.svg" alt="Quest와 Echo Flow Lite 명령이 단일 권한 mux를 거쳐 실물 브리지로 전달되는 구조" /></a><figcaption><b>단일 소유자 명령 권한.</b> TELEOP과 POLICY는 명시적인 모드입니다. 모든 전환은 실측 위치 HOLD와 승인·재활성화를 거치며, 오래된 데이터·하트비트 누락·잘못된 값·연결 해제는 다른 생산자로 자동 전환하지 않고 HOLD로 복귀합니다. <a href="/assets/robot-learning/safety-authority-mux.svg" target="_blank" rel="noreferrer">전체 크기로 보기 ↗</a></figcaption></figure>
       <div class="evidence-grid">
-        <article class="evidence-card reveal"><span>01</span><h3>로봇 형태 설정</h3><p>관절 한계, 작업공간, 홈 자세, 스케일, 툴 프레임은 V2 URDF 인터페이스에서 가져옵니다. yaw-180 설정은 케이블에 안전한 중립 자세를 J1 = 0에 맞춥니다.</p></article>
-        <article class="evidence-card reveal"><span>02</span><h3>조작자 매핑</h3><p>Grip은 클러치, Trigger는 그리퍼 조작, 컨트롤러 자세는 말단 목표로 사용합니다. 명시적인 리셋과 yaw 조작으로 위험한 미러 매핑을 피합니다.</p></article>
-        <article class="evidence-card reveal"><span>03</span><h3>안전 경계</h3><p>소프트 스타트, 속도 제한, 관절 한계 마진, 명령 편차 검사, 0.5초 워치독, 트립 상태 고정이 미완성 모터 백엔드 앞단에 위치합니다.</p></article>
+        <article class="evidence-card reveal"><span>입력</span><h3>WebXR 매핑</h3><p>오른쪽 컨트롤러 자세가 말단 목표가 됩니다. Grip은 클러치, Trigger는 파지이며, 명시적인 home/HOLD 조작으로 추적 시작 시 의도하지 않은 이동을 막습니다.</p></article>
+        <article class="evidence-card reveal"><span>제어</span><h3>IK + 제한된 동작</h3><p>목표는 작업공간, 관절 한계, 속도, 명령 편차, 워치독 검사를 통과합니다. 학습 모델은 CAN 모터에 직접 명령하지 않습니다.</p></article>
+        <article class="evidence-card reveal"><span>안전 실패</span><h3>대체보다 HOLD</h3><p>상태·영상·청크·하트비트·제어 주기·연결이 유효하지 않으면 새 추종을 멈춥니다. TRIP은 사람이 원인을 확인한 뒤 해제합니다.</p></article>
       </div>
     </section>
 
     <section class="case-section section-shell">
-      <div class="case-section-heading reveal"><p class="section-index">03 / 모델과 버전</p><h2>학습 모델은 유지하고 로봇 인터페이스를 확장합니다.</h2></div>
-      <div class="case-two-column reveal">
-        <p class="case-emphasis">Echo Flow Lite는 이 프로젝트를 위해 만든 경량 LeRobot 정책입니다. 두 카메라 영상과 관절 상태를 공간 토큰으로 인코딩하고, Transformer가 플로 매칭으로 짧은 행동 청크를 복원합니다.</p>
-        <div class="case-prose"><p>전면·손목 카메라에는 공유 ResNet18 인코더를 사용하고, 카메라 구분·공간 위치·로봇 상태 토큰을 더한 뒤 플로 매칭 디코더가 관절과 그리퍼의 절대 명령을 예측합니다.</p><p>LeHome Challenge 2026 솔루션의 플로 매칭, AWR/RECAP, DAgger, Sim-to-Real 전략을 설계 참고로 삼았습니다. 다만 LeHome·π0.5·OpenPI 전체 모델을 구현한 것은 아니며 언어 모델도 포함하지 않습니다.</p><a class="detail-link" href="https://arxiv.org/abs/2606.27163" target="_blank" rel="noreferrer">참고 논문: Learning to Fold — LeHome Challenge 2026 ↗</a></div>
+      <div class="case-section-heading reveal"><p class="section-index">04 / 시연 데이터</p><h2>데이터셋은 로봇이 본 것, 측정한 것, 수행하도록 요청받은 것을 같은 시간축에 기록합니다.</h2></div>
+      <figure class="diagram-figure diagram-figure-light reveal"><a class="diagram-scroll" href="/assets/robot-learning/data-contract.svg" target="_blank" rel="noreferrer" aria-label="데이터셋 인터페이스 도식을 전체 크기로 열기"><img src="/assets/robot-learning/data-contract.svg" alt="전면·손목 영상, 실측 관절 상태, 행동, 에피소드 레이블로 구성한 LeRobot 데이터셋 도식" /></a><figcaption><b>데이터셋 인터페이스.</b> 전면 RGB, 손목 RGB, 실측 관절각, 조작자 행동, 작업 문장, 성공 여부를 하나의 15 Hz 시간축에 맞춥니다. 무작위 프레임이 아니라 완전한 에피소드 단위로 학습·검증·시험 데이터를 분리합니다. <a href="/assets/robot-learning/data-contract.svg" target="_blank" rel="noreferrer">전체 크기로 보기 ↗</a></figcaption></figure>
+      <div class="dataset-field-grid reveal">
+        <article><span>관측 / 영상</span><b>전면 RGB + 손목 RGB</b><p>전면 영상은 전체 작업공간을, 손목 영상은 그리퍼와 물체의 근접 관계를 제공합니다.</p></article>
+        <article><span>관측 / 상태</span><b>실측 관절 피드백</b><p>CAN 피드백을 로봇 상태로 사용합니다. 명령 자세를 이미 도달한 실측값처럼 관측에 복사하지 않습니다.</p></article>
+        <article><span>행동</span><b>관절 목표 + 파지</b><p>V1은 J1/J2/J3와 파지를 기록하며, V2는 이를 팔 5축과 병렬 그리퍼 명령으로 확장합니다.</p></article>
+        <article><span>에피소드 품질</span><b>동작·시야·리셋·결과</b><p>정지·가림·충돌·잘못된 리셋 에피소드는 폐기하거나 실패 데이터로 분리하며 좋은 시연으로 다시 표기하지 않습니다.</p></article>
       </div>
-      <div class="evidence-grid">
-        <article class="evidence-card reveal"><span>V1</span><h3>3축 + AmazingHand</h3><p>첫 번째 구성은 두 RGB 영상과 실측 관절각 3개를 입력받아 J1/J2/J3와 AmazingHand 그립 명령을 예측합니다.</p></article>
-        <article class="evidence-card reveal"><span>CORE</span><h3>Echo Flow Lite</h3><p>공유 듀얼 카메라 인코더, 공간·상태 토큰, Transformer, 플로 매칭 행동 디코더를 공통 학습 구조로 유지합니다.</p></article>
-        <article class="evidence-card reveal"><span>V2</span><h3>5축 + 2지 그리퍼</h3><p>현재 버전은 DM-J4340P 구동기 5개와 STS3215 병렬 그리퍼를 사용합니다. Placo에는 <code>arm_v2_yaw180_ik.urdf</code>를 사용하고, 시각화에는 원본 그리퍼 모델을 유지합니다.</p></article>
+      <div class="stage-grid reveal">
+        <article><span>A</span><h3>파이프라인 스모크</h3><strong>20 episodes</strong><p>수집을 늘리기 전에 두 카메라, 실측 상태, 행동, 15 Hz 주기, 리셋, 저장 완료를 확인합니다.</p></article>
+        <article><span>B</span><h3>첫 BC 후보</h3><strong>성공 시연 ≥100개</strong><p>성공을 보장하는 숫자가 아닌 시작 목표입니다. 의도적인 복구와 실패도 이후 평가를 위해 보존합니다.</p></article>
+        <article><span>C</span><h3>고정 평가</h3><strong>5 cm 이상 리프트 · 0.5초 유지</strong><p>접근, 안정적 감싸기, 리프트, 유지, 물체 위치별 실패와 안전 HOLD/TRIP을 보고합니다.</p></article>
+        <article><span>D</span><h3>실패 중심 개선</h3><strong>DAgger + simulation-only AWR</strong><p>반복 실패 구간의 교정 데이터를 수집하고 고정 시드 평가가 퇴행 없이 향상될 때만 체크포인트를 승격합니다.</p></article>
       </div>
     </section>
 
     <section class="case-section section-shell">
-      <div class="case-section-heading reveal"><p class="section-index">04 / 엔지니어링 근거</p><h2>완성된 정책이 아니라 측정된 동작을 제시합니다.</h2></div>
-      <div class="figure-grid">
-        <figure class="technical-figure reveal"><img src="/assets/robot-learning/arm-joint-structure.png" alt="커스텀 로봇 팔의 관절 구조 주석 이미지" /><figcaption><b>관절 구조.</b> 기구학 모델 구성에 사용한 5관절 체인과 툴 프레임 형상.</figcaption></figure>
-        <figure class="technical-figure reveal"><img src="/assets/robot-learning/body-iso-reach.png" alt="로봇 body render showing the arm reach envelope" /><figcaption><b>도달 범위 검토.</b> 로봇 렌더링을 통해 로봇 형태와 도달 가능한 작업공간을 검토했습니다.</figcaption></figure>
+      <div class="case-section-heading reveal"><p class="section-index">05 / Echo Flow Lite</p><h2>범용 VLA의 이름만 바꾼 모델이 아니라, 이 로봇을 위해 작고 검증 가능하게 만든 플로 매칭 정책입니다.</h2></div>
+      <figure class="diagram-figure reveal"><a class="diagram-scroll" href="/assets/robot-learning/echo-flow-lite-pipeline.svg" target="_blank" rel="noreferrer" aria-label="Echo Flow Lite 구조 도식을 전체 크기로 열기"><img src="/assets/robot-learning/echo-flow-lite-pipeline.svg" alt="듀얼 카메라 관측에서 플로 매칭 행동 청크를 생성하는 Echo Flow Lite 구조" /></a><figcaption><b>폐루프 행동 생성.</b> 공유 ResNet18이 두 카메라의 공간 토큰을 만들고, 카메라 구분·영상 위치·로봇 상태·플로 시간을 조건으로 Transformer가 노이즈에서 15개 목표 행동을 복원합니다. 그중 3개만 실행한 뒤 다시 관측합니다. <a href="/assets/robot-learning/echo-flow-lite-pipeline.svg" target="_blank" rel="noreferrer">전체 크기로 보기 ↗</a></figcaption></figure>
+      <div class="case-two-column case-two-column-reset reveal">
+        <p class="case-emphasis">LeHome Challenge 연구의 플로 매칭과 Sim-to-Real 방향을 참고하되, 현재 프로젝트가 실제로 구현하고 검증할 수 있는 범위로 축소했습니다.</p>
+        <div class="case-prose"><p>학습 시 정답 행동 청크와 Gaussian noise를 임의의 플로 시간에서 섞고, Transformer가 데이터와 노이즈를 잇는 속도를 학습합니다. 추론 시에는 노이즈에서 시작해 Euler 적분 10단계로 행동 시퀀스를 복원합니다.</p><p>선택적인 success·progress head는 이후 어려운 예제 탐색과 시뮬레이션 AWR에 사용합니다. 없는 레이블은 만들어내지 않고 마스킹합니다. Echo Flow Lite에는 언어 모델이 없으며 LeHome·π0.5·OpenPI 전체 시스템을 구현한 것도 아닙니다.</p><a class="detail-link" href="https://arxiv.org/abs/2606.27163" target="_blank" rel="noreferrer">참고 논문: Learning to Fold — LeHome Challenge 2026 ↗</a></div>
       </div>
-      <div class="decision-table reveal" role="table" aria-label="엔지니어링 결정">
-        <div class="table-row table-head" role="row"><span role="columnheader">제약</span><span role="columnheader">결정</span><span role="columnheader">이유</span></div>
-        <div class="table-row" role="row"><span role="cell">자세 자유도가 제한된 5관절</span><span role="cell">단순한 접근 형상의 작업부터 시작</span><span role="cell">임의 손목 자세가 필요한 작업을 피함</span></div>
-        <div class="table-row" role="row"><span role="cell">WebXR은 보안 컨텍스트가 필요</span><span role="cell">자체 서명 로컬 HTTPS</span><span role="cell">브라우저 기반 헤드셋 접근 유지</span></div>
-        <div class="table-row" role="row"><span role="cell">모터 인터페이스 미검증</span><span role="cell">안전과 IK를 로컬에 유지하고 모의 백엔드 사용</span><span role="cell">소프트웨어 진행이 실물 안전 준비 완료로 오해되지 않도록 함</span></div>
+      <div class="model-fact-row reveal"><span><b>공유 인코더</b>ResNet18 공간 특징 토큰</span><span><b>디코더</b>Transformer 플로 속도</span><span><b>추론</b>Euler 적분 10단계</span><span><b>피드백</b>3개 실행 / 15 Hz 재계획</span></div>
+    </section>
+
+    <section class="case-section section-shell">
+      <div class="case-section-heading reveal"><p class="section-index">06 / Simulation-to-Real 게이트</p><h2>렌더링, 접촉, 학습 행동은 서로 다른 주장이고 각각 별도의 시험이 필요합니다.</h2></div>
+      <div class="proof-gates reveal">
+        <article><span>01</span><h3>구조 검증</h3><p>URDF 계층, 관절, 한계, 질량, 충돌, 툴 프레임, 카메라 마운트가 의도대로 로드되는지 확인합니다.</p><small>근거: 모델 검사 + 설정 검증</small></article>
+        <article><span>02</span><h3>기계적 검증</h3><p>스크립트 제어기가 물체에 접근해 감싸고 들어 올린 뒤 안정적인 접촉을 유지합니다.</p><small>승격 목표: 20회 중 최소 18회 성공</small></article>
+        <article><span>03</span><h3>데이터 검증</h3><p>영상, 피드백, 행동, 타임스탬프, 리셋, 결과가 동기화되고 재생 가능한지 확인합니다.</p><small>근거: 20 에피소드 수집 스모크 + 검사</small></article>
+        <article><span>04</span><h3>행동 검증</h3><p>고정 물체 위치와 시드에서 동결된 정책이 안전 구간 퇴행 없이 성공하는지 측정합니다.</p><small>아직 주장하지 않음: V2 체크포인트 및 롤아웃 성공률</small></article>
+      </div>
+      <div class="decision-table reveal" role="table" aria-label="Simulation-to-Real 설계 결정">
+        <div class="table-row table-head" role="row"><span role="columnheader">위험</span><span role="columnheader">설계 결정</span><span role="columnheader">이유</span></div>
+        <div class="table-row" role="row"><span role="cell">긴 개루프 행동</span><span role="cell">15개 중 3개만 실행한 뒤 재관측</span><span role="cell">물체 이동과 모델 오차를 다음 계획에 반영</span></div>
+        <div class="table-row" role="row"><span role="cell">시뮬레이션 전용 상태</span><span role="cell">실물 배포 관측에서 제외</span><span role="cell">학습 입력이 실제 로봇에서도 존재하도록 유지</span></div>
+        <div class="table-row" role="row"><span role="cell">측정 없는 무작위화</span><span role="cell">실측값으로 Isaac 설정 작성</span><span role="cell">추측이 아니라 근거 주변을 랜덤화</span></div>
       </div>
     </section>
 
     <section class="case-section case-status-section">
       <div class="section-shell">
-        <div class="case-section-heading reveal"><p class="section-index">05 / 상태</p><h2>현재 동작하는 것과 아직 동작하지 않는 것을 구분합니다.</h2></div>
+        <div class="case-section-heading reveal"><p class="section-index">07 / 현재 상태</p><h2>구현한 기반과 아직 진행 중인 연구를 분리해 표시합니다.</h2></div>
         <div class="status-columns reveal">
-          <div><h3>검증 완료</h3><ul class="check-list"><li>Quest 컨트롤러 및 핸드 트래킹 입력</li><li>좌표 변환과 클러치 동작</li><li>V2 yaw-180 URDF 설정과 시뮬레이션 IK</li><li>대시보드와 가상 로봇 시각화</li><li>Echo Flow Lite V1 플러그인 및 정책 스모크 테스트</li><li>모의 모터 백엔드를 이용한 안전 계층 동작</li></ul></div>
-          <div><h3>남은 과제</h3><ul class="open-list"><li>관절 방향·영점 오프셋·게인·그리퍼 범위의 실물 캘리브레이션</li><li>프로덕션 백엔드를 통한 V2 실물 팔 구동</li><li>5축 팔과 2지 그리퍼를 사용한 LeRobot 에피소드 수집</li><li>Echo Flow Lite V2 체크포인트 학습과 실물 정책 평가</li></ul></div>
+          <div><h3>구현·확인</h3><ul class="check-list"><li>Quest 컨트롤러 및 핸드 트래킹 입력 경로</li><li>좌표 변환, 클러치, 명시적인 HOLD 동작</li><li>URDF 기반 설정과 시뮬레이션 IK 워크플로</li><li>듀얼 카메라 LeRobot 기록기와 수집 검증 게이트</li><li>Echo Flow Lite 정책·설정·프로세서 플러그인과 스모크 테스트</li><li>단일 명령 권한 mux와 모의 백엔드 안전 동작</li></ul></div>
+          <div><h3>진행 중·아직 주장하지 않음</h3><ul class="open-list"><li>V2 실물 관절 부호·영점·게인·그리퍼 캘리브레이션</li><li>공개 포트폴리오용 최종 V2 시각 URDF·메시 동기화</li><li>5축·2지 그리퍼 에피소드 수집</li><li>Echo Flow Lite V2 체크포인트 학습</li><li>Isaac 접촉 검증과 스크립트 기반 18/20 기계 시험</li><li>고정 시드 실물 정책 성공률 측정</li></ul></div>
         </div>
       </div>
     </section>
 
-    <nav class="case-pagination section-shell" aria-label="Project navigation"><a href="/ko/#research"><span>전체 프로젝트</span><b>← 연구 목록</b></a><a href="/ko/projects/tickle-bot/"><span>다음 사례</span><b>Tickle Bot →</b></a></nav>
+    <nav class="case-pagination section-shell" aria-label="프로젝트 탐색"><a href="/ko/#research"><span>전체 프로젝트</span><b>← 연구 목록</b></a><a href="/ko/projects/tickle-bot/"><span>다음 사례 연구</span><b>Tickle Bot →</b></a></nav>
   </main>
 
   <footer class="site-footer section-shell"><div><p class="footer-title">이동제</p><p>Robot Manipulation · Simulation-to-Real · Learning-Based Control</p></div><div class="footer-links"><a href="https://github.com/dingdongdengdong" target="_blank" rel="noreferrer">GitHub ↗</a><a href="/ko/#top">홈 ↑</a></div><p class="footer-note">근거를 우선하고, 진행 중인 작업은 명확히 표시합니다.</p></footer>

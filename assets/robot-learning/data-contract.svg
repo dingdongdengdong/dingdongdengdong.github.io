@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Robot demonstration dataset contract</title>
+  <desc id="desc">A synchronized fifteen-hertz timeline records front and wrist images, measured joint state, commanded action, task text, and episode outcome.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#eef0e9"/><stop offset="1" stop-color="#e3e6dd"/></linearGradient>
+    <style>.k{font:800 17px ui-sans-serif,system-ui,sans-serif;letter-spacing:.13em;fill:#315cff}.h{font:760 34px ui-sans-serif,system-ui,sans-serif;fill:#141814}.p{font:520 18px ui-sans-serif,system-ui,sans-serif;fill:#626a64}.s{font:700 16px ui-sans-serif,system-ui,sans-serif;fill:#252b27}.sw{font:700 16px ui-sans-serif,system-ui,sans-serif;fill:#fff}.m{font:650 16px ui-monospace,SFMono-Regular,monospace;fill:#315cff}</style>
+  </defs>
+  <rect width="1600" height="900" rx="44" fill="url(#bg)"/>
+  <text x="90" y="96" class="k">LEROBOT DATASET / SYNCHRONIZED DEMONSTRATIONS</text>
+  <text x="90" y="154" class="h">One frame means every sensor and action refers to the same moment</text>
+  <line x1="115" y1="252" x2="1480" y2="252" stroke="#9da59e" stroke-width="3"/>
+  <g fill="#315cff"><circle cx="180" cy="252" r="10"/><circle cx="450" cy="252" r="10"/><circle cx="720" cy="252" r="10"/><circle cx="990" cy="252" r="10"/><circle cx="1260" cy="252" r="10"/><circle cx="1470" cy="252" r="10"/></g>
+  <text x="180" y="221" class="m" text-anchor="middle">t0</text><text x="450" y="221" class="m" text-anchor="middle">t1</text><text x="720" y="221" class="m" text-anchor="middle">t2</text><text x="990" y="221" class="m" text-anchor="middle">t3</text><text x="1260" y="221" class="m" text-anchor="middle">…</text><text x="1470" y="221" class="m" text-anchor="middle">15 Hz</text>
+
+  <g transform="translate(90 315)">
+    <rect width="1420" height="410" rx="28" fill="#f8f9f5" stroke="#cbd0c8"/>
+    <line x1="250" y1="0" x2="250" y2="410" stroke="#d1d5ce"/><line x1="500" y1="0" x2="500" y2="410" stroke="#d1d5ce"/><line x1="790" y1="0" x2="790" y2="410" stroke="#d1d5ce"/><line x1="1085" y1="0" x2="1085" y2="410" stroke="#d1d5ce"/>
+    <text x="34" y="54" class="k">OBSERVATION</text><text x="284" y="54" class="k">OBSERVATION</text><text x="534" y="54" class="k">STATE</text><text x="824" y="54" class="k">ACTION</text><text x="1119" y="54" class="k">EPISODE</text>
+
+    <rect x="34" y="92" width="182" height="152" rx="18" fill="#161c18"/><circle cx="99" cy="162" r="32" fill="#315cff"/><circle cx="99" cy="162" r="13" fill="#a9b8ff"/><path d="M151 129h38M151 160h26M151 191h38" stroke="#778179" stroke-width="10" stroke-linecap="round"/>
+    <text x="34" y="285" class="s">front RGB</text><text x="34" y="318" class="p">640 × 480</text>
+    <rect x="284" y="92" width="182" height="152" rx="18" fill="#161c18"/><circle cx="349" cy="162" r="32" fill="#315cff"/><circle cx="349" cy="162" r="13" fill="#a9b8ff"/><path d="M401 129h38M401 160h26M401 191h38" stroke="#778179" stroke-width="10" stroke-linecap="round"/>
+    <text x="284" y="285" class="s">wrist RGB</text><text x="284" y="318" class="p">640 × 480</text>
+
+    <text x="534" y="116" class="s">measured feedback</text><text x="534" y="164" class="m">q<tspan baseline-shift="sub">act</tspan> = [J1 … J5]</text><rect x="534" y="202" width="210" height="12" rx="6" fill="#d9ddd6"/><rect x="534" y="202" width="134" height="12" rx="6" fill="#315cff"/><text x="534" y="270" class="p">Never replace feedback</text><text x="534" y="301" class="p">with commanded state</text>
+
+    <text x="824" y="116" class="s">operator target</text><text x="824" y="164" class="m">[J1 … J5, grasp]</text><g fill="#315cff"><rect x="824" y="204" width="44" height="44" rx="9"/><rect x="878" y="204" width="44" height="44" rx="9"/><rect x="932" y="204" width="44" height="44" rx="9"/><rect x="986" y="204" width="44" height="44" rx="9"/></g><text x="824" y="301" class="p">Quest → IK → safety</text>
+
+    <text x="1119" y="116" class="s">task</text><text x="1119" y="156" class="p">“pick, lift, hold”</text><text x="1119" y="215" class="s">outcome</text><text x="1119" y="255" class="p">success / failure</text><text x="1119" y="315" class="s">quality gates</text><text x="1119" y="350" class="p">motion · visibility · reset</text>
+  </g>
+  <rect x="90" y="774" width="1420" height="66" rx="20" fill="#141914"/>
+  <text x="122" y="815" class="sw">Pipeline smoke: 20 episodes</text><text x="486" y="815" class="sw">First BC candidate: ≥100 successful demos</text><text x="1074" y="815" class="sw">Split by episode, never by random frames</text>
+</svg>

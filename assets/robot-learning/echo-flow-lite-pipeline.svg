@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Echo Flow Lite policy pipeline</title>
+  <desc id="desc">Two camera images and robot state pass through a shared spatial encoder and flow-matching transformer to produce a fifteen-step action chunk. Three steps are executed before observing again.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101512"/><stop offset="1" stop-color="#171e19"/></linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#315cff"/><stop offset="1" stop-color="#7390ff"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="16" stdDeviation="22" flood-opacity=".22"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#75807a"/></marker>
+    <style>
+      .k{font:700 18px ui-sans-serif,system-ui,sans-serif;letter-spacing:.14em;fill:#829087}.h{font:760 31px ui-sans-serif,system-ui,sans-serif;fill:#f4f5f1}.p{font:500 18px ui-sans-serif,system-ui,sans-serif;fill:#aeb8b1}.pw{font:500 18px ui-sans-serif,system-ui,sans-serif;fill:#eef1ff}.s{font:650 16px ui-sans-serif,system-ui,sans-serif;fill:#dce2dd}.sw{font:650 16px ui-sans-serif,system-ui,sans-serif;fill:#fff}.n{font:800 15px ui-monospace,SFMono-Regular,monospace;fill:#b9c6ff}.line{stroke:#69756f;stroke-width:3;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1600" height="900" rx="44" fill="url(#bg)"/>
+  <circle cx="1500" cy="-40" r="330" fill="#315cff" opacity=".09"/><circle cx="80" cy="900" r="260" fill="#315cff" opacity=".06"/>
+  <text x="92" y="98" class="k">ECHO FLOW LITE / CLOSED-LOOP IMITATION POLICY</text>
+  <text x="92" y="154" class="h">Observe → generate an action chunk → act briefly → observe again</text>
+
+  <g filter="url(#shadow)">
+    <rect x="90" y="240" width="250" height="170" rx="24" fill="#202722" stroke="#465149"/>
+    <rect x="90" y="446" width="250" height="170" rx="24" fill="#202722" stroke="#465149"/>
+    <rect x="90" y="652" width="250" height="118" rx="24" fill="#202722" stroke="#465149"/>
+    <rect x="430" y="280" width="270" height="430" rx="28" fill="#202722" stroke="#465149"/>
+    <rect x="790" y="280" width="280" height="430" rx="28" fill="url(#blue)"/>
+    <rect x="1160" y="280" width="350" height="430" rx="28" fill="#202722" stroke="#465149"/>
+  </g>
+
+  <g>
+    <rect x="115" y="268" width="200" height="78" rx="12" fill="#111713" stroke="#58645d"/>
+    <circle cx="160" cy="307" r="18" fill="#315cff" opacity=".9"/><circle cx="160" cy="307" r="8" fill="#9eb0ff"/>
+    <path d="M195 290h86M195 307h66M195 324h76" stroke="#65716a" stroke-width="7" stroke-linecap="round"/>
+    <text x="115" y="382" class="s">Front RGB</text><text x="248" y="382" class="p">global scene</text>
+
+    <rect x="115" y="474" width="200" height="78" rx="12" fill="#111713" stroke="#58645d"/>
+    <circle cx="160" cy="513" r="18" fill="#315cff" opacity=".9"/><circle cx="160" cy="513" r="8" fill="#9eb0ff"/>
+    <path d="M195 496h86M195 513h66M195 530h76" stroke="#65716a" stroke-width="7" stroke-linecap="round"/>
+    <text x="115" y="588" class="s">Wrist RGB</text><text x="246" y="588" class="p">near-field view</text>
+
+    <text x="115" y="696" class="s">Measured joint state</text><text x="115" y="733" class="n">q<tspan baseline-shift="sub">t</tspan> = [J1 … J5]</text>
+  </g>
+
+  <path d="M340 325H405" class="line"/><path d="M340 531H405" class="line"/><path d="M340 711H405" class="line"/>
+  <text x="469" y="333" class="k">SHARED ENCODER</text>
+  <text x="469" y="391" class="h">ResNet18</text>
+  <text x="469" y="427" class="p">spatial feature maps</text>
+  <g fill="#315cff"><circle cx="485" cy="492" r="8"/><circle cx="523" cy="492" r="8"/><circle cx="561" cy="492" r="8"/><circle cx="599" cy="492" r="8"/><circle cx="637" cy="492" r="8"/><circle cx="485" cy="530" r="8"/><circle cx="523" cy="530" r="8"/><circle cx="561" cy="530" r="8"/><circle cx="599" cy="530" r="8"/><circle cx="637" cy="530" r="8"/></g>
+  <text x="469" y="593" class="s">+ camera identity</text><text x="469" y="624" class="s">+ row / column position</text><text x="469" y="655" class="s">+ robot-state token</text>
+
+  <path d="M700 495H764" class="line"/>
+  <text x="830" y="333" class="k" fill="#d9e0ff">FLOW DECODER</text>
+  <text x="830" y="391" class="h">Transformer</text>
+  <text x="830" y="427" class="pw">conditions on observations + flow time</text>
+  <path d="M842 491c51-61 137-61 188 0M842 557c51 61 137 61 188 0" stroke="#f5f7ff" stroke-width="5" fill="none" opacity=".82"/>
+  <circle cx="842" cy="524" r="15" fill="#fff"/><circle cx="1030" cy="524" r="15" fill="#fff"/>
+  <text x="830" y="624" class="sw">noise → 10 Euler steps → action</text>
+  <text x="830" y="662" class="pw">flow-matching velocity prediction</text>
+
+  <path d="M1070 495H1134" class="line"/>
+  <text x="1200" y="333" class="k">ACTION CHUNK</text>
+  <text x="1200" y="391" class="h">15 future targets</text>
+  <text x="1200" y="427" class="p">absolute joints + gripper</text>
+  <g>
+    <rect x="1200" y="474" width="52" height="52" rx="10" fill="#315cff"/><rect x="1262" y="474" width="52" height="52" rx="10" fill="#315cff"/><rect x="1324" y="474" width="52" height="52" rx="10" fill="#315cff"/>
+    <rect x="1386" y="474" width="52" height="52" rx="10" fill="#39413c"/><rect x="1448" y="474" width="30" height="52" rx="10" fill="#39413c"/>
+    <text x="1217" y="507" class="s" fill="#fff">1</text><text x="1279" y="507" class="s" fill="#fff">2</text><text x="1341" y="507" class="s" fill="#fff">3</text><text x="1403" y="507" class="s">4</text><text x="1455" y="507" class="s">…</text>
+  </g>
+  <text x="1200" y="584" class="s">Execute only 3</text><text x="1200" y="619" class="p">then discard the rest</text>
+  <text x="1200" y="668" class="s">Re-observe at 15 Hz</text>
+
+  <path d="M1335 710C1335 820 280 842 216 786" stroke="#315cff" stroke-width="4" fill="none" marker-end="url(#arrow)" opacity=".9"/>
+  <rect x="604" y="785" width="394" height="58" rx="29" fill="#1f2b24" stroke="#315cff"/>
+  <text x="801" y="821" class="s" text-anchor="middle">short-horizon execution keeps feedback in the loop</text>
+</svg>
