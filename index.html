@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Dongje Lee — Robotics & Embodied AI. Robot learning, manipulation, sim-to-real, and physical AI research." />
+  <meta name="description" content="Dongje Lee — Robot Manipulation, Simulation-to-Real, and Learning-Based Control research." />
   <meta name="theme-color" content="#f4f4ef" />
-  <meta property="og:title" content="Dongje Lee — Robotics & Embodied AI" />
-  <meta property="og:description" content="Building learning-based robotic systems from simulation to physical deployment." />
+  <meta property="og:title" content="Dongje Lee — Robot Manipulation &amp; Sim-to-Real" />
+  <meta property="og:description" content="Robot Manipulation, Simulation-to-Real, and Learning-Based Control research." />
   <meta property="og:type" content="website" />
-  <title>Dongje Lee — Robotics & Embodied AI</title>
+  <title>Dongje Lee — Robot Manipulation &amp; Sim-to-Real</title>
   <link rel="alternate" hreflang="en" href="/" />
   <link rel="alternate" hreflang="ko" href="/ko/" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="/styles.css?v=20260901-1" />
+  <link rel="stylesheet" href="/styles.css?v=20260903-2" />
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -35,7 +35,7 @@
     <div id="top"></div>
     <section class="hero section-shell">
       <div class="hero-copy reveal">
-        <p class="eyebrow">Robotics · Embodied AI · Robot Learning</p>
+        <p class="eyebrow">Robot Manipulation · Simulation-to-Real · Learning-Based Control</p>
         <h1>Building intelligence that<br /><span>moves in the real world.</span></h1>
         <p class="hero-lede">
           I build learning-based robotic systems across manipulation, teleoperation,
@@ -47,7 +47,7 @@
           <a class="button button-ghost" href="https://github.com/dingdongdengdong" target="_blank" rel="noreferrer">GitHub profile ↗</a>
         </div>
         <div class="hero-meta" aria-label="Research interests">
-          <span>Robot Manipulation</span><span>Sim-to-Real</span><span>VLA</span><span>Physical AI</span>
+          <span>Robot Manipulation</span><span>Simulation-to-Real</span><span>Learning-Based Control</span>
         </div>
       </div>
 
@@ -167,25 +167,25 @@
           </div>
         </article>
 
-        <article class="project project-card reveal">
+        <article class="project project-card aerial-card reveal">
           <div class="project-copy">
-            <div class="project-topline"><span class="project-number">03</span><span class="status">Ongoing</span></div>
-            <h3>Drone Inspection Platform</h3>
-            <p class="project-subtitle">Smart-maritime inspection research spanning synthetic data, vision AI, edge inference, and field workflows.</p>
-            <p class="project-body">An ongoing pipeline connecting Isaac Sim, synthetic defect data, PX4/ROS2 flight software, edge perception, and Jetson deployment for infrastructure inspection.</p>
-            <div class="status-note"><strong>Current evidence</strong><span>Architecture, safety contracts, mission definitions, and simulation tooling are implemented. Training and hardware targets remain planned.</span></div>
-            <div class="tag-row"><span>Isaac Sim</span><span>PX4</span><span>ROS2</span><span>Jetson</span><span>Vision</span></div>
+            <div class="project-topline"><span class="project-number">03</span><span class="status status-current">Validated pipeline</span></div>
+            <h3>Isaac Sim Crack Inspection</h3>
+            <p class="project-subtitle">Synthetic crack data and live vision tooling for steel infrastructure inspection.</p>
+            <p class="project-body">An Isaac Sim 5.1 workflow projects traceable SteelCrack textures onto a crane scene, generates aligned RGB and segmentation evidence, and connects structural-crack models to a live C920 camera interface.</p>
+            <dl class="project-facts" aria-label="Validated Isaac Sim results">
+              <div><dt>5,000</dt><dd>validated frames</dd></div>
+              <div><dt>0.9244</dt><dd>mean pixel IoU</dd></div>
+              <div><dt>0</dt><dd>failed validation gates</dd></div>
+            </dl>
+            <div class="tag-row"><span>Isaac Sim 5.1</span><span>Replicator</span><span>SteelCrack</span><span>OmniCrack30K</span><span>Vision</span></div>
             <div class="project-links">
               <a class="case-link" href="/projects/aerial-inspection/">Read case study →</a>
               <a href="https://github.com/dingdongdengdong/isaacsim_focused" target="_blank" rel="noreferrer">Isaac Sim source ↗</a>
             </div>
           </div>
-          <div class="project-mini-visual aerial-visual">
-            <span class="mini-kicker">SIM → REAL PIPELINE</span>
-            <div class="aerial-pipeline">
-              <span>Isaac Sim</span><i>→</i><span>Synthetic Data</span><i>→</i><span>Perception</span><i>→</i><span>Jetson</span>
-            </div>
-            <div class="drone-mark" aria-hidden="true"><i></i><i></i><b>+</b><i></i><i></i></div>
+          <div class="project-mini-visual aerial-visual aerial-proof-visual">
+            <img src="/assets/aerial-inspection/sim2real-drone-crane-validation-pipeline.png" alt="Isaac Sim drone and crane validation environment with Replicator synthetic crack examples" loading="lazy" decoding="async" />
           </div>
         </article>
 
@@ -204,6 +204,38 @@
             <img src="/assets/reports/eco-rover-report-cover.png" alt="Eco-Rover 2026 development report cover" />
           </div>
         </article>
+
+        <article class="project project-card project-card-wide echo-project-card reveal">
+          <div class="project-copy">
+            <div class="project-topline"><span class="project-number">05</span><span class="status status-current">Full-road proof</span></div>
+            <h3>Echo Full<br />Isaac Sim Self-Drive</h3>
+            <p class="project-subtitle">A portable Isaac Sim 5.1 autonomous mobile-robot stack with ROS 2 Jazzy, Nav2, and RTX LiDAR.</p>
+            <p class="project-body">The system drives a differential-drive proxy while a preserved Echo CAD shell follows measured PhysX pose. Its recorded validation run covers pedestrian stop/clear, LiDAR-based detour, two speed bumps, a right turn, uneven and unpaved road sections, and a terminal stop.</p>
+            <dl class="project-facts" aria-label="Verified self-driving evidence">
+              <div><dt>Isaac 5.1</dt><dd>Docker runtime</dd></div>
+              <div><dt>RTX LiDAR</dt><dd>sensor-owned detour</dd></div>
+              <div><dt>PASS</dt><dd>full road-course proof</dd></div>
+            </dl>
+            <div class="tag-row"><span>Isaac Sim 5.1</span><span>ROS 2 Jazzy</span><span>Nav2</span><span>RTX LiDAR</span><span>PhysX</span><span>SuperArm</span></div>
+            <div class="project-links">
+              <a class="case-link" href="/projects/echo-self-drive/">Read case study →</a>
+            </div>
+          </div>
+          <div class="project-video-visual project-video-grid" aria-label="Two synchronized views of the Isaac Sim road-course proof">
+            <figure class="project-video-panel">
+              <video controls autoplay muted loop playsinline preload="metadata" poster="/assets/echo-self-drive/road-follow-poster.jpg" aria-label="External follow view of the Echo Full road run">
+                <source src="/assets/echo-self-drive/road-follow.mp4" type="video/mp4" />
+              </video>
+              <figcaption><span>External view</span><b>Full-road simulation</b></figcaption>
+            </figure>
+            <figure class="project-video-panel">
+              <video controls autoplay muted loop playsinline preload="metadata" poster="/assets/echo-self-drive/road-onboard-poster.jpg" aria-label="Onboard view of the Echo Full road run">
+                <source src="/assets/echo-self-drive/road-onboard.mp4" type="video/mp4" />
+              </video>
+              <figcaption><span>Onboard view</span><b>Robot camera proof</b></figcaption>
+            </figure>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -211,9 +243,10 @@
       <div><p class="section-index">Research ledger / 2025—2026</p><h2 id="research-ledger-title">From accessible platforms to field-ready systems.</h2></div>
       <div class="ledger-list">
         <article><time>2025</time><div><h3>Tickle Bot</h3><p>Conference research on lowering the barrier to Physical AI experimentation, supported by a public demo and project report.</p></div></article>
-        <article><time>2026</time><div><h3>Robot learning & Customarm</h3><p>Teleoperation, kinematics, simulation, safety, and learning-ready data flows for non-standard embodiments.</p></div></article>
-        <article><time>2026</time><div><h3>Drone inspection</h3><p>Isaac Sim synthetic data, vision models, edge inference, localization, and a staged physical validation roadmap.</p></div></article>
+        <article><time>2026</time><div><h3>Robot learning &amp; Customarm</h3><p>Teleoperation, kinematics, simulation, safety, and learning-ready data flows for non-standard embodiments.</p></div></article>
+        <article><time>2026</time><div><h3>Isaac Sim inspection</h3><p>A validated 5,000-frame synthetic crack dataset, mask-alignment checks, and live structural-crack segmentation tooling.</p></div></article>
         <article><time>2026</time><div><h3>Eco-Rover</h3><p>An integrated mobile platform that brings autonomy, sensing, collection behavior, and Customarm work into a public-environment use case.</p></div></article>
+        <article><time>2026</time><div><h3>Echo Full self-drive</h3><p>Isaac Sim 5.1, ROS 2 Jazzy, Nav2, RTX LiDAR, and evidence-gated full-road autonomous navigation.</p></div></article>
       </div>
     </section>
 
@@ -233,7 +266,7 @@
     <section id="product" class="section-shell section-block">
       <div class="section-heading reveal">
         <div>
-          <p class="section-index">03 / Product & Engineering</p>
+          <p class="section-index">03 / Product &amp; Engineering</p>
           <h2>Research is not the only<br />thing I ship.</h2>
         </div>
         <p class="section-intro">I also build and operate software products around robotics. This work is presented separately from my research projects.</p>
@@ -268,13 +301,24 @@
           <p class="section-index">04 / About</p>
           <h2>I care about the full robot stack.</h2>
           <p>My interests sit at the boundary between robot learning and systems engineering: how a policy is trained matters, but so do embodiment, control interfaces, data quality, simulation fidelity, and deployment constraints.</p>
-          <p>I am particularly interested in manipulation, embodied AI, VLA models, synthetic data, and sim-to-real evaluation on custom robotic platforms.</p>
+          <p>My research interests are Robot Manipulation, Simulation-to-Real, and Learning-Based Control, with a focus on learning and evaluating manipulation policies for custom robotic platforms.</p>
         </div>
         <div class="about-details reveal">
           <div class="detail-group">
             <p class="detail-label">Education</p>
             <h3>Soongsil University</h3>
-            <p>Physics<br />Double Major: Next-Generation Semiconductor Engineering</p>
+            <p>Physics<br />Double Major: Next-Generation Semiconductor Engineering<br />Expected graduation: August 2027</p>
+          </div>
+          <div class="detail-group">
+            <p class="detail-label">Research experience</p>
+            <h3>Humanoid Robot 2nd Cohort LAB</h3>
+            <p>MODULABS · July–December 2025<br />Presented and discussed recent humanoid robotics papers, reproduced research ideas in simulation, and contributed to team-based research. My primary responsibility was manipulator and hardware development.</p>
+            <a class="detail-link" href="https://modulabs.co.kr/labs/591" target="_blank" rel="noreferrer">View LAB program ↗</a>
+          </div>
+          <div class="detail-group">
+            <p class="detail-label">Research availability</p>
+            <h3>September 2026 — August 2027</h3>
+            <p>30–40 hours per week<br />Available on weekdays outside scheduled classes</p>
           </div>
           <div class="detail-group">
             <p class="detail-label">Recognition</p>
@@ -311,7 +355,7 @@
   <footer class="site-footer section-shell">
     <div>
       <p class="footer-title">Dongje Lee</p>
-      <p>Robotics · Embodied AI · Robot Learning</p>
+      <p>Robot Manipulation · Simulation-to-Real · Learning-Based Control</p>
     </div>
     <div class="footer-links">
       <a href="https://github.com/dingdongdengdong" target="_blank" rel="noreferrer">GitHub ↗</a>
@@ -321,6 +365,6 @@
   </footer>
 
   <script type="module" src="/assets/robot/urdf-hero.bundle.js?v=20260901-4"></script>
-  <script src="/script.js?v=20260901-1"></script>
+  <script src="/script.js?v=20260903-1"></script>
 </body>
 </html>

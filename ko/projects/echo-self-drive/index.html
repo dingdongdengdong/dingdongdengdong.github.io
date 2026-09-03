@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="사례 연구: ROS 2 Jazzy, Nav2, RTX LiDAR 및 도로 코스 검증을 갖춘 Echo Full Isaac Sim 5.1 자율주행." />
+  <meta name="theme-color" content="#f4f4ef" />
+  <title>Echo Full Isaac Sim 자율주행 — 이동제</title>
+  <link rel="alternate" hreflang="ko" href="/ko/projects/echo-self-drive/" />
+  <link rel="alternate" hreflang="en" href="/projects/echo-self-drive/" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/styles.css?v=20260903-2" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">본문으로 건너뛰기</a><div class="noise" aria-hidden="true"></div>
+  <header class="site-header"><a class="brand" href="/ko/#top" aria-label="이동제 홈"><span class="brand-mark">DL</span><span class="brand-name">이동제</span></a><nav class="nav" aria-label="주요 메뉴"><a href="/ko/#research" aria-current="page">연구</a><a href="/ko/#publication">논문</a><a href="/ko/#product">제품</a><a href="/ko/#about">소개</a></nav><div class="header-actions"><a class="nav-cta" href="https://github.com/dingdongdengdong" target="_blank" rel="noreferrer">GitHub ↗</a><a class="language-link" href="/projects/echo-self-drive/" lang="en" hreflang="en" aria-label="View in English">EN</a></div></header>
+
+  <main id="main-content" class="case-study">
+    <section class="case-hero section-shell reveal"><div class="case-breadcrumb"><a href="/ko/#research">주요 연구</a><span>/</span><span>05</span></div><div class="case-hero-grid"><div><div class="case-status"><span class="status status-current">전체 도로 검증</span><span>Isaac Sim 5.1</span></div><h1>Echo Full<br /><span>자율주행</span></h1><p class="case-lede">Isaac Sim 5.1과 ROS 2 Jazzy에서 물리 제어, 보존된 CAD 시각물, 센서 인식, 검증 산출물을 각각 독립된 인터페이스와 책임 범위로 분리한 이식 가능한 자율 이동로봇 스택입니다.</p></div><dl class="case-summary" aria-label="프로젝트 요약"><div><dt>시뮬레이션</dt><dd>Docker 기반 Isaac Sim 5.1</dd></div><div><dt>자율주행</dt><dd>ROS 2 Jazzy + Nav2</dd></div><div><dt>인식</dt><dd>RTX LiDAR + 차체 RGB + IMU</dd></div><div><dt>로봇</dt><dd>Echo Full CAD 셸, 물리 프록시, 선택적 SuperArm</dd></div></dl></div></section>
+
+  <section class="case-band"><div class="section-shell metric-grid reveal" aria-label="검증 요약"><article class="metric-card"><strong>PASS</strong><span>전체 도로 코스 실행</span><small>기계 판독 가능한 검증 결과 보존</small></article><article class="metric-card"><strong>2</strong><span>과속방지턱 통과</span><small>원래 시작 위치에서 출발</small></article><article class="metric-card"><strong>RTX</strong><span>LiDAR 기반 우회</span><small>장면 정답 정보 우회 없음</small></article><article class="metric-card"><strong>0</strong><span>원본 소스 수정</span><small>파생 프록시와 시각 셸 사용</small></article></div></section>
+
+  <section class="case-section section-shell"><div class="case-section-heading reveal"><p class="section-index">01 / 시스템 경계</p><h2>로봇의 시각 셸은 물리 상태를 추종하며, 직접 물리를 제어하지 않습니다.</h2></div><div class="case-two-column reveal"><p class="case-emphasis">직접 구성한 차동구동 프록시가 충돌과 움직임을 제어하고, 보호된 Echo Full CAD 셸은 매 시뮬레이션 스텝 이후 측정된 PhysX 자세만 추종합니다.</p><div class="case-prose"><p>런타임은 기존 Echo, VICA, SuperArm 소스 트리를 보존합니다. 파생 URDF와 USD 에셋이 원본 파일을 수정하지 않고 도로 장면에 필요한 물리 및 구성을 담당합니다.</p><p>명령은 ROS 2 <code>/cmd_vel</code>로 들어와 안전 명령 멀티플렉서를 거쳐 프록시를 구동합니다. 오도메트리, 관절 상태, TF, RGB, IMU, RTX LiDAR는 명시적인 센서 인터페이스로 유지됩니다.</p></div></div></section>
+
+  <section class="case-section section-shell"><div class="case-section-heading reveal"><p class="section-index">02 / 아키텍처</p><h2>제어, 인식, 시각물, 검증은 각각 하나의 소유자를 가집니다.</h2></div><div class="aerial-architecture reveal" aria-label="Echo Full 자율주행 아키텍처"><div class="aerial-layer"><b>보호된 Echo CAD + 파생 SuperArm</b><span>체크섬으로 고정된 시각 참조 · 물리 권한 없음</span></div><i>↓ 측정 자세 추종</i><div class="aerial-layer"><b>차동구동 물리 프록시</b><span>69.5 mm 휠 · 0.400 m 휠 간격 · 충돌과 접촉 담당</span></div><i>↕</i><div class="aerial-split"><div><b>ROS 2 Jazzy + Nav2</b><span>명령 멀티플렉서 · EKF · 수명주기 · NavigateToPose</span></div><div><b>RTX LiDAR 인식</b><span>최신성 검사 · 장애물 정지 · 센서 확인 우회</span></div></div><i>↓</i><div class="aerial-layer aerial-layer-final"><b>독립 검증 묶음</b><span>Isaac 보고서 · 미션 요약 · 강건성 검증 · 로그와 녹화</span></div></div></section>
+
+  <section class="case-section section-shell"><div class="case-section-heading reveal"><p class="section-index">03 / 시각 검증</p><h2>보존한 검증 영상은 외부 동작과 로봇의 온보드 시야를 함께 보여줍니다.</h2></div><div class="figure-grid reveal"><figure class="technical-figure"><video controls autoplay muted loop playsinline preload="metadata" poster="/assets/echo-self-drive/road-follow-poster.jpg" aria-label="Echo Full 도로 주행 외부 추종 시점"><source src="/assets/echo-self-drive/road-follow.mp4" type="video/mp4" /></video><figcaption><b>외부 추종 시점.</b> 보존된 Echo 시각 셸이 물리 프록시를 따라 Isaac Sim 도로 코스를 주행합니다.</figcaption></figure><figure class="technical-figure"><video controls autoplay muted loop playsinline preload="metadata" poster="/assets/echo-self-drive/road-onboard-poster.jpg" aria-label="Echo Full 도로 주행 온보드 시점"><source src="/assets/echo-self-drive/road-onboard.mp4" type="video/mp4" /></video><figcaption><b>온보드 주행 시점.</b> 차체 RGB 카메라는 매니퓰레이션 전용 손목 D435i 경로와 분리됩니다.</figcaption></figure></div></section>
+
+  <section class="case-section section-shell"><div class="case-section-heading reveal"><p class="section-index">04 / 전체 도로 검증</p><h2>센서 입력을 우회하지 않고 코스를 완료해야 성공입니다.</h2></div><div class="roadmap reveal"><div class="roadmap-item roadmap-current"><span>조건 01</span><h3>보행자 대기</h3><p>보행자 조건에서 정지하고 경로가 열린 뒤에만 주행을 재개합니다.</p></div><div class="roadmap-item roadmap-current"><span>조건 02</span><h3>LiDAR 우회</h3><p>장애물 대응은 미리 지정한 장면 좌표가 아니라 최신 RTX LiDAR ROS 측정값을 사용합니다.</p></div><div class="roadmap-item roadmap-current"><span>조건 03</span><h3>복합 노면</h3><p>과속방지턱 2개, 우회전, 중앙이 볼록한 도로, 비포장 구간을 모두 통과합니다.</p></div><div class="roadmap-item roadmap-current"><span>조건 04</span><h3>종점 정지</h3><p>바퀴 접촉 상태를 유지한 채 정지 명령을 확인하고 종점에 멈춥니다.</p></div></div></section>
+
+  <section class="case-section section-shell"><div class="case-section-heading reveal"><p class="section-index">05 / 통합 로봇 구성</p><h2>Nav2에 매니퓰레이션 제어권을 주지 않으면서 SuperArm + AmazingHand를 탑재합니다.</h2></div><div class="evidence-grid"><article class="evidence-card reveal"><span>마운트</span><h3>파생 물리 결합</h3><p>파생된 SuperArm + AmazingHand 에셋을 전면 가로 프레임에 장착하되 이동 프록시만 주행 권한을 유지합니다.</p></article><article class="evidence-card reveal"><span>인터록</span><h3>주행 전 접이 자세</h3><p>도로 실행기는 휠 명령 인터록을 해제하기 전에 팔을 주행용 접이 자세로 접습니다.</p></article><article class="evidence-card reveal"><span>센서 분리</span><h3>손목 D435i 범위 유지</h3><p>손목 RGB, 정렬 깊이, IMU는 매니퓰레이션 검증에 사용하며 도로 주행은 차체 RGB와 RTX LiDAR를 사용합니다.</p></article></div></section>
+
+  <section class="case-section case-status-section"><div class="section-shell"><div class="case-section-heading reveal"><p class="section-index">06 / 근거 경계</p><h2>검증하지 않은 범주를 명시하기 때문에 근거가 더 강합니다.</h2></div><div class="status-columns reveal"><div><h3>보관된 근거로 검증됨</h3><ul class="check-list"><li>원래 시작 위치에서 전체 도로 코스 완료</li><li>보행자 정지 및 재출발</li><li>센서로 확인한 RTX LiDAR 우회</li><li>과속방지턱 2개 및 복합 노면</li><li>건강한 접촉과 종점 정지 명령 확인</li></ul></div><div><h3>별도 범주 또는 미검증</h3><ul class="open-list"><li>보관된 전체 도로 실행의 오류 주입 검증</li><li>뷰포트 LiDAR 디버그 시각화 근거</li><li>주행 중 파지 또는 매니퓰레이션 접촉</li><li>실제 도로 Sim-to-Real 적용</li><li>패키지 내부 Docker 이미지, 드라이버, NGC 인증 정보</li></ul></div></div></div></section>
+
+  <nav class="case-pagination section-shell" aria-label="프로젝트 이동"><a href="/ko/projects/eco-rover/"><span>이전 사례</span><b>← Eco-Rover + Customarm</b></a><a href="/ko/#research"><span>모든 프로젝트</span><b>연구 목록 →</b></a></nav>
+  </main>
+  <footer class="site-footer section-shell"><div><p class="footer-title">이동제</p><p>Robot Manipulation · Simulation-to-Real · Learning-Based Control</p></div><div class="footer-links"><a href="https://github.com/dingdongdengdong" target="_blank" rel="noreferrer">GitHub ↗</a><a href="/ko/#top">홈 ↑</a></div><p class="footer-note">근거를 우선하고, 진행 중인 작업은 명확히 표시합니다.</p></footer>
+  <script src="/script.js?v=20260903-1"></script>
+</body>
+</html>

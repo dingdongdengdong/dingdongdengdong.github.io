@@ -21,3 +21,10 @@ if (header) {
     header.style.boxShadow = window.scrollY > 20 ? '0 14px 45px rgba(15,20,16,.08)' : 'none';
   }, { passive: true });
 }
+
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('video[autoplay]').forEach((video) => {
+    video.autoplay = false;
+    video.pause();
+  });
+}
