@@ -27,7 +27,7 @@
         <div>
           <div class="case-status"><span class="status status-current">진행 중인 연구</span><span>2026</span></div>
           <h1>커스텀 로봇<br /><span>학습 플랫폼</span></h1>
-          <p class="case-lede">현재 V2는 커스텀 5축 팔과 2지 그리퍼를 사용하며, 3축 팔과 AmazingHand로 구성한 V1에서 개발한 Echo Flow Lite 학습 구조를 그대로 이어갑니다.</p>
+          <p class="case-lede">현재 V2는 Damiao DM-J4340P 관절 구동기 5개와 Feetech STS3215 병렬 2지 그리퍼를 사용하며, 3축 팔과 AmazingHand로 구성한 V1에서 개발한 Echo Flow Lite 학습 구조를 이어갑니다.</p>
           <div class="case-actions"><a class="button button-dark" href="https://github.com/dingdongdengdong/robot_arm_vr" target="_blank" rel="noreferrer">텔레오퍼레이션 소스 ↗</a><a class="button button-ghost" href="https://github.com/dingdongdengdong/superarm_ws" target="_blank" rel="noreferrer">통합 문서 ↗</a><a class="button button-ghost" href="https://arxiv.org/abs/2606.27163" target="_blank" rel="noreferrer">LeHome 참고 논문 ↗</a></div>
         </div>
         <dl class="case-summary" aria-label="프로젝트 요약">
@@ -63,7 +63,7 @@
         <div class="architecture-branch"><span>URDF 기반 설정</span><span>웹 대시보드</span><span>Echo Flow Lite 데이터셋 → 정책 경로</span></div>
       </div>
       <div class="evidence-grid">
-        <article class="evidence-card reveal"><span>01</span><h3>로봇 형태 설정</h3><p>관절 한계, 작업공간, 홈 자세, 스케일, 툴 프레임을 여러 곳에 중복하지 않고 등록된 URDF에서 하나의 설정으로 생성합니다.</p></article>
+        <article class="evidence-card reveal"><span>01</span><h3>로봇 형태 설정</h3><p>관절 한계, 작업공간, 홈 자세, 스케일, 툴 프레임은 V2 URDF 인터페이스에서 가져옵니다. yaw-180 설정은 케이블에 안전한 중립 자세를 J1 = 0에 맞춥니다.</p></article>
         <article class="evidence-card reveal"><span>02</span><h3>조작자 매핑</h3><p>Grip은 클러치, Trigger는 그리퍼 조작, 컨트롤러 자세는 말단 목표로 사용합니다. 명시적인 리셋과 yaw 조작으로 위험한 미러 매핑을 피합니다.</p></article>
         <article class="evidence-card reveal"><span>03</span><h3>안전 경계</h3><p>소프트 스타트, 속도 제한, 관절 한계 마진, 명령 편차 검사, 0.5초 워치독, 트립 상태 고정이 미완성 모터 백엔드 앞단에 위치합니다.</p></article>
       </div>
@@ -78,7 +78,7 @@
       <div class="evidence-grid">
         <article class="evidence-card reveal"><span>V1</span><h3>3축 + AmazingHand</h3><p>첫 번째 구성은 두 RGB 영상과 실측 관절각 3개를 입력받아 J1/J2/J3와 AmazingHand 그립 명령을 예측합니다.</p></article>
         <article class="evidence-card reveal"><span>CORE</span><h3>Echo Flow Lite</h3><p>공유 듀얼 카메라 인코더, 공간·상태 토큰, Transformer, 플로 매칭 행동 디코더를 공통 학습 구조로 유지합니다.</p></article>
-        <article class="evidence-card reveal"><span>V2</span><h3>5축 + 2지 그리퍼</h3><p>현재 버전은 모델 구조를 유지하면서 팔 축을 2개 추가하고 AmazingHand를 2지 그리퍼로 교체해 하드웨어·상태·행동 인터페이스를 확장합니다.</p></article>
+        <article class="evidence-card reveal"><span>V2</span><h3>5축 + 2지 그리퍼</h3><p>현재 버전은 DM-J4340P 구동기 5개와 STS3215 병렬 그리퍼를 사용합니다. Placo에는 <code>arm_v2_yaw180_ik.urdf</code>를 사용하고, 시각화에는 원본 그리퍼 모델을 유지합니다.</p></article>
       </div>
     </section>
 
@@ -100,8 +100,8 @@
       <div class="section-shell">
         <div class="case-section-heading reveal"><p class="section-index">05 / 상태</p><h2>현재 동작하는 것과 아직 동작하지 않는 것을 구분합니다.</h2></div>
         <div class="status-columns reveal">
-          <div><h3>검증 완료</h3><ul class="check-list"><li>Quest 컨트롤러 및 핸드 트래킹 입력</li><li>좌표 변환과 클러치 동작</li><li>URDF 기반 설정과 IK</li><li>대시보드와 가상 로봇 시각화</li><li>Echo Flow Lite V1 플러그인 및 정책 스모크 테스트</li><li>모의 모터 백엔드를 이용한 안전 계층 동작</li></ul></div>
-          <div><h3>남은 과제</h3><ul class="open-list"><li>V2 모터 모델, CAN 인터페이스, 관절 방향, 영점 오프셋 검증</li><li>프로덕션 백엔드를 통한 V2 실물 팔 구동</li><li>5축 팔과 2지 그리퍼를 사용한 LeRobot 에피소드 수집</li><li>Echo Flow Lite V2 체크포인트 학습과 실물 정책 평가</li></ul></div>
+          <div><h3>검증 완료</h3><ul class="check-list"><li>Quest 컨트롤러 및 핸드 트래킹 입력</li><li>좌표 변환과 클러치 동작</li><li>V2 yaw-180 URDF 설정과 시뮬레이션 IK</li><li>대시보드와 가상 로봇 시각화</li><li>Echo Flow Lite V1 플러그인 및 정책 스모크 테스트</li><li>모의 모터 백엔드를 이용한 안전 계층 동작</li></ul></div>
+          <div><h3>남은 과제</h3><ul class="open-list"><li>관절 방향·영점 오프셋·게인·그리퍼 범위의 실물 캘리브레이션</li><li>프로덕션 백엔드를 통한 V2 실물 팔 구동</li><li>5축 팔과 2지 그리퍼를 사용한 LeRobot 에피소드 수집</li><li>Echo Flow Lite V2 체크포인트 학습과 실물 정책 평가</li></ul></div>
         </div>
       </div>
     </section>

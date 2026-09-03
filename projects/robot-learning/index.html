@@ -27,7 +27,7 @@
         <div>
           <div class="case-status"><span class="status status-current">Current research</span><span>2026</span></div>
           <h1>Custom Robot<br /><span>Learning Platform</span></h1>
-          <p class="case-lede">The current V2 combines a custom 5-axis arm and a two-finger gripper with the same Echo Flow Lite learning architecture first developed for the 3-axis, AmazingHand-equipped V1.</p>
+          <p class="case-lede">The current V2 combines five Damiao DM-J4340P joint actuators and a Feetech STS3215 parallel two-finger gripper with the Echo Flow Lite learning architecture first developed for the 3-axis, AmazingHand-equipped V1.</p>
           <div class="case-actions"><a class="button button-dark" href="https://github.com/dingdongdengdong/robot_arm_vr" target="_blank" rel="noreferrer">Teleoperation source ↗</a><a class="button button-ghost" href="https://github.com/dingdongdengdong/superarm_ws" target="_blank" rel="noreferrer">Integration notes ↗</a><a class="button button-ghost" href="https://arxiv.org/abs/2606.27163" target="_blank" rel="noreferrer">LeHome reference ↗</a></div>
         </div>
         <dl class="case-summary" aria-label="Project summary">
@@ -63,7 +63,7 @@
         <div class="architecture-branch"><span>URDF-derived configuration</span><span>Web dashboard</span><span>Echo Flow Lite dataset → policy path</span></div>
       </div>
       <div class="evidence-grid">
-        <article class="evidence-card reveal"><span>01</span><h3>Embodiment configuration</h3><p>Joint limits, workspace, home pose, scale, and tool frames are derived from the registered URDF into one generated configuration instead of being duplicated across the stack.</p></article>
+        <article class="evidence-card reveal"><span>01</span><h3>Embodiment configuration</h3><p>Joint limits, workspace, home pose, scale, and tool frames come from the V2 URDF contract. The yaw-180 configuration aligns the cable-safe neutral with J1 = 0.</p></article>
         <article class="evidence-card reveal"><span>02</span><h3>Operator mapping</h3><p>Grip acts as a clutch, trigger controls the gripper, controller pose supplies the end-effector target, and explicit reset and yaw controls avoid unsafe mirrored mappings.</p></article>
         <article class="evidence-card reveal"><span>03</span><h3>Safety boundary</h3><p>Soft start, velocity limiting, joint-limit margins, command divergence checks, a 0.5-second watchdog, and trip-state freezing sit ahead of the unfinished motor backend.</p></article>
       </div>
@@ -78,7 +78,7 @@
       <div class="evidence-grid">
         <article class="evidence-card reveal"><span>V1</span><h3>3-axis + AmazingHand</h3><p>The first contract consumes two RGB views and three measured joint angles, then predicts J1/J2/J3 and an AmazingHand grasp command.</p></article>
         <article class="evidence-card reveal"><span>CORE</span><h3>Echo Flow Lite</h3><p>The shared dual-camera encoder, spatial/state tokens, transformer, and flow-matching action decoder remain the common learning architecture.</p></article>
-        <article class="evidence-card reveal"><span>V2</span><h3>5-axis + two-finger gripper</h3><p>The current version preserves the model design while expanding the hardware, state, and action contract by two arm axes and replacing AmazingHand with a two-finger gripper.</p></article>
+        <article class="evidence-card reveal"><span>V2</span><h3>5-axis + two-finger gripper</h3><p>The current version uses five DM-J4340P actuators and an STS3215 parallel gripper. Placo uses <code>arm_v2_yaw180_ik.urdf</code>, while visualization retains the original gripper model.</p></article>
       </div>
     </section>
 
@@ -100,8 +100,8 @@
       <div class="section-shell">
         <div class="case-section-heading reveal"><p class="section-index">05 / Status</p><h2>What works now, and what does not.</h2></div>
         <div class="status-columns reveal">
-          <div><h3>Validated</h3><ul class="check-list"><li>Quest controller and hand-tracking input</li><li>Coordinate transforms and clutch behavior</li><li>URDF-driven configuration and IK</li><li>Dashboard and virtual robot visualization</li><li>Echo Flow Lite V1 plugin and policy smoke tests</li><li>Safety-layer behavior with a mock motor backend</li></ul></div>
-          <div><h3>Still open</h3><ul class="open-list"><li>Verified V2 motor model, CAN interface, joint directions, and zero offsets</li><li>Physical V2 arm actuation through the production backend</li><li>LeRobot episode collection with five axes and the two-finger gripper</li><li>Echo Flow Lite V2 checkpoint training and real-robot policy evaluation</li></ul></div>
+          <div><h3>Validated</h3><ul class="check-list"><li>Quest controller and hand-tracking input</li><li>Coordinate transforms and clutch behavior</li><li>V2 yaw-180 URDF configuration and simulated IK</li><li>Dashboard and virtual robot visualization</li><li>Echo Flow Lite V1 plugin and policy smoke tests</li><li>Safety-layer behavior with a mock motor backend</li></ul></div>
+          <div><h3>Still open</h3><ul class="open-list"><li>Physical calibration of joint directions, zero offsets, gains, and gripper range</li><li>Physical V2 arm actuation through the production backend</li><li>LeRobot episode collection with five axes and the two-finger gripper</li><li>Echo Flow Lite V2 checkpoint training and real-robot policy evaluation</li></ul></div>
         </div>
       </div>
     </section>
