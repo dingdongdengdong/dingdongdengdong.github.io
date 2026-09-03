@@ -49,8 +49,8 @@
         </div>
       </div>
 
-      <div class="hero-visual reveal" data-urdf-hero data-urdf-state="loading" data-ready-label="SuperArm 인터랙티브 URDF 준비 완료" data-fallback-label="정적 로봇 일러스트" aria-label="SuperArm과 AmazingHand 인터랙티브 모델">
-        <div class="urdf-stage" data-urdf-stage role="img" aria-label="5개 팔 관절과 8개 손 관절이 움직이는 SuperArm과 AmazingHand. 드래그하여 회전하고 스크롤하여 확대할 수 있습니다."></div>
+      <div class="hero-visual reveal" data-urdf-hero data-urdf-state="loading" data-ready-label="이전 AmazingHand URDF 시각화 준비 완료" data-fallback-label="정적 로봇 일러스트" aria-label="이전 SuperArm·AmazingHand 프로토타입 인터랙티브 시각화">
+        <div class="urdf-stage" data-urdf-stage role="img" aria-label="이전 5관절 SuperArm·AmazingHand 프로토타입 시각화. 드래그하여 회전하고 스크롤하여 확대할 수 있습니다."></div>
         <svg class="urdf-fallback" viewBox="0 0 620 520" role="img" aria-labelledby="heroGraphicTitle">
           <title id="heroGraphicTitle">사람의 입력에서 실제 로봇까지 이어지는 로봇 학습 파이프라인</title>
           <defs>
@@ -83,7 +83,7 @@
           </g>
           <g class="pulse-dot"><circle cx="90" cy="390" r="7" /><circle cx="515" cy="160" r="7" /></g>
         </svg>
-        <div class="visual-note visual-note-a"><span>URDF</span> 13개 가동 관절 · 6D 제어</div>
+        <div class="visual-note visual-note-a"><span>이전 URDF</span> AmazingHand 프로토타입</div>
         <div class="visual-note visual-note-c">드래그 회전 · 스크롤 확대</div>
         <div class="urdf-joint-chip"><span>가동 중</span><b data-urdf-joint>SuperArm joint 1</b></div>
         <button class="urdf-motion-toggle" type="button" data-urdf-toggle data-pause-label="동작 일시정지" data-play-label="동작 재생" aria-pressed="false">동작 일시정지</button>
@@ -110,14 +110,14 @@
         <div class="project-copy">
           <div class="project-topline"><span class="project-number">01</span><span class="status status-current">진행 중인 연구</span></div>
           <h3>커스텀 로봇 학습 플랫폼</h3>
-          <p class="project-subtitle">AmazingHand를 결합한 커스텀 5-DoF 매니퓰레이터의 VR 텔레오퍼레이션 및 모방학습.</p>
-          <p class="project-body">비표준 로봇 형태를 위한 엔드투엔드 워크플로를 구축하고 있습니다. 커스텀 팔을 원격 조작하고, 시뮬레이션으로 검증하며, 시연을 LeRobot 데이터셋으로 구조화해 학습 기반 매니퓰레이션 정책을 평가합니다.</p>
+          <p class="project-subtitle">2지 그리퍼를 장착한 커스텀 V2 5축 팔을 위한 Echo Flow Lite 모방학습.</p>
+          <p class="project-body">V1은 3축 팔과 AmazingHand를 결합했습니다. 현재 V2는 동일한 듀얼 카메라·플로 매칭 정책 구조를 유지하면서 팔을 5축으로 확장하고 말단 장치를 2지 그리퍼로 변경했습니다.</p>
           <dl class="project-facts" aria-label="검증된 프로젝트 근거">
             <div><dt>90.1 Hz</dt><dd>Quest 입력 중앙값</dd></div>
             <div><dt>0.027 ms</dt><dd>문서화된 IK 계산 시간</dd></div>
             <div><dt>30 tests</dt><dd>안전 계층 검증</dd></div>
           </dl>
-          <div class="tag-row"><span>LeRobot</span><span>ACT / VLA</span><span>Isaac Sim</span><span>MuJoCo</span><span>Quest 2</span><span>IK</span></div>
+          <div class="tag-row"><span>LeRobot</span><span>Echo Flow Lite</span><span>Flow Matching</span><span>Isaac Sim</span><span>Quest 2</span><span>IK</span></div>
           <div class="project-links">
             <a class="case-link" href="/ko/projects/robot-learning/">사례 자세히 보기 →</a>
             <a href="https://github.com/dingdongdengdong/robot_arm_vr" target="_blank" rel="noreferrer">소스 ↗</a>
@@ -128,11 +128,11 @@
           <div class="flow-arrow">→</div>
           <div class="flow-node"><b>IK + Safety</b><small>작업공간 제약</small></div>
           <div class="flow-arrow">→</div>
-          <div class="flow-node flow-large"><b>5-DoF Arm</b><small>+ AmazingHand</small></div>
+          <div class="flow-node flow-large"><b>V2 · 5축 팔</b><small>+ 2지 그리퍼</small></div>
           <div class="flow-branch"><span>↓</span><span>↓</span></div>
           <div class="flow-bottom">
             <div class="flow-node"><b>Isaac / MuJoCo</b><small>디지털 트윈</small></div>
-            <div class="flow-node"><b>LeRobot</b><small>데이터셋 → 정책</small></div>
+            <div class="flow-node"><b>Echo Flow Lite</b><small>LeRobot 플로 정책</small></div>
           </div>
         </div>
       </article>
@@ -241,7 +241,7 @@
       <div><p class="section-index">연구 기록 / 2025—2026</p><h2 id="research-ledger-title">접근 가능한 플랫폼에서 현장형 시스템까지.</h2></div>
       <div class="ledger-list">
         <article><time>2025</time><div><h3>Tickle Bot</h3><p>공개 데모와 프로젝트 보고서로 뒷받침되는, Physical AI 실험의 진입 장벽을 낮추기 위한 학술대회 연구입니다.</p></div></article>
-        <article><time>2026</time><div><h3>로봇 학습 · Customarm</h3><p>비표준 로봇 형태를 위한 텔레오퍼레이션, 운동학, 시뮬레이션, 안전, 학습 데이터 흐름을 구축합니다.</p></div></article>
+        <article><time>2026</time><div><h3>Echo Flow Lite · Customarm</h3><p>3축 AmazingHand V1에서 5축·2지 그리퍼 V2로 확장 중인 듀얼 카메라 플로 매칭 정책입니다.</p></div></article>
         <article><time>2026</time><div><h3>Isaac Sim 점검</h3><p>검증된 5,000프레임 합성 균열 데이터셋, 마스크 정렬 검사, 실시간 구조 균열 세그멘테이션 도구를 구축했습니다.</p></div></article>
         <article><time>2026</time><div><h3>Eco-Rover</h3><p>자율주행, 환경 인지, 수거 동작, Customarm 작업을 공공 환경 활용 사례로 통합한 이동 로봇 플랫폼입니다.</p></div></article>
         <article><time>2026</time><div><h3>Echo Full 자율주행</h3><p>Isaac Sim 5.1, ROS 2 Jazzy, Nav2, RTX LiDAR와 근거 중심 전체 도로 자율주행 검증을 연결합니다.</p></div></article>
@@ -338,7 +338,7 @@
           <div class="detail-group">
             <p class="detail-label">연구 스택</p>
             <div class="stack-list">
-              <span>로봇 학습 <b>LeRobot · ACT · VLA · PyTorch</b></span>
+              <span>로봇 학습 <b>LeRobot · Echo Flow Lite · Flow Matching · PyTorch</b></span>
               <span>시뮬레이션 <b>Isaac Sim · MuJoCo</b></span>
               <span>로보틱스 <b>ROS2 · URDF · IK</b></span>
               <span>배포 <b>Jetson · TensorRT · PX4</b></span>

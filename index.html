@@ -51,8 +51,8 @@
         </div>
       </div>
 
-      <div class="hero-visual reveal" data-urdf-hero data-urdf-state="loading" data-ready-label="Interactive SuperArm URDF ready" data-fallback-label="Static robot illustration" aria-label="Interactive SuperArm and AmazingHand model">
-        <div class="urdf-stage" data-urdf-stage role="img" aria-label="Animated five-joint SuperArm with eight-joint AmazingHand. Drag to rotate and scroll to zoom."></div>
+      <div class="hero-visual reveal" data-urdf-hero data-urdf-state="loading" data-ready-label="Earlier AmazingHand URDF visualization ready" data-fallback-label="Static robot illustration" aria-label="Interactive visualization of an earlier SuperArm and AmazingHand prototype">
+        <div class="urdf-stage" data-urdf-stage role="img" aria-label="Earlier five-joint SuperArm and AmazingHand prototype visualization. Drag to rotate and scroll to zoom."></div>
         <svg class="urdf-fallback" viewBox="0 0 620 520" role="img" aria-labelledby="heroGraphicTitle">
           <title id="heroGraphicTitle">Robot learning pipeline from human input to physical robot</title>
           <defs>
@@ -85,7 +85,7 @@
           </g>
           <g class="pulse-dot"><circle cx="90" cy="390" r="7" /><circle cx="515" cy="160" r="7" /></g>
         </svg>
-        <div class="visual-note visual-note-a"><span>URDF</span> 13 moving joints · 6D control</div>
+        <div class="visual-note visual-note-a"><span>EARLIER URDF</span> AmazingHand prototype</div>
         <div class="visual-note visual-note-c">Drag to orbit · Scroll to zoom</div>
         <div class="urdf-joint-chip"><span>Moving</span><b data-urdf-joint>SuperArm joint 1</b></div>
         <button class="urdf-motion-toggle" type="button" data-urdf-toggle data-pause-label="Pause motion" data-play-label="Play motion" aria-pressed="false">Pause motion</button>
@@ -112,14 +112,14 @@
         <div class="project-copy">
           <div class="project-topline"><span class="project-number">01</span><span class="status status-current">Current research</span></div>
           <h3>Custom Robot Learning Platform</h3>
-          <p class="project-subtitle">VR teleoperation and imitation learning for a custom 5-DoF manipulator with AmazingHand.</p>
-          <p class="project-body">I am building an end-to-end workflow for a non-standard robot embodiment: teleoperate the custom arm, validate it in simulation, structure demonstrations as LeRobot datasets, and evaluate learning-based manipulation policies.</p>
+          <p class="project-subtitle">Echo Flow Lite imitation learning for a custom V2 5-axis arm with a two-finger gripper.</p>
+          <p class="project-body">V1 paired a 3-axis arm with AmazingHand. The current V2 keeps the same dual-camera, flow-matching policy architecture while expanding the embodiment to five arm axes and a two-finger gripper.</p>
           <dl class="project-facts" aria-label="Verified project evidence">
             <div><dt>90.1 Hz</dt><dd>median Quest input rate</dd></div>
             <div><dt>0.027 ms</dt><dd>documented IK solve time</dd></div>
             <div><dt>30 tests</dt><dd>safety-layer validation</dd></div>
           </dl>
-          <div class="tag-row"><span>LeRobot</span><span>ACT / VLA</span><span>Isaac Sim</span><span>MuJoCo</span><span>Quest 2</span><span>IK</span></div>
+          <div class="tag-row"><span>LeRobot</span><span>Echo Flow Lite</span><span>Flow Matching</span><span>Isaac Sim</span><span>Quest 2</span><span>IK</span></div>
           <div class="project-links">
             <a class="case-link" href="/projects/robot-learning/">Read case study →</a>
             <a href="https://github.com/dingdongdengdong/robot_arm_vr" target="_blank" rel="noreferrer">Source ↗</a>
@@ -130,11 +130,11 @@
           <div class="flow-arrow">→</div>
           <div class="flow-node"><b>IK + Safety</b><small>workspace constraints</small></div>
           <div class="flow-arrow">→</div>
-          <div class="flow-node flow-large"><b>5-DoF Arm</b><small>+ AmazingHand</small></div>
+          <div class="flow-node flow-large"><b>V2 · 5-Axis Arm</b><small>+ two-finger gripper</small></div>
           <div class="flow-branch"><span>↓</span><span>↓</span></div>
           <div class="flow-bottom">
             <div class="flow-node"><b>Isaac / MuJoCo</b><small>digital twin</small></div>
-            <div class="flow-node"><b>LeRobot</b><small>dataset → policy</small></div>
+            <div class="flow-node"><b>Echo Flow Lite</b><small>LeRobot flow policy</small></div>
           </div>
         </div>
       </article>
@@ -243,7 +243,7 @@
       <div><p class="section-index">Research ledger / 2025—2026</p><h2 id="research-ledger-title">From accessible platforms to field-ready systems.</h2></div>
       <div class="ledger-list">
         <article><time>2025</time><div><h3>Tickle Bot</h3><p>Conference research on lowering the barrier to Physical AI experimentation, supported by a public demo and project report.</p></div></article>
-        <article><time>2026</time><div><h3>Robot learning &amp; Customarm</h3><p>Teleoperation, kinematics, simulation, safety, and learning-ready data flows for non-standard embodiments.</p></div></article>
+        <article><time>2026</time><div><h3>Echo Flow Lite · Customarm</h3><p>A dual-camera flow-matching policy evolving from a 3-axis AmazingHand V1 to a 5-axis, two-finger-gripper V2.</p></div></article>
         <article><time>2026</time><div><h3>Isaac Sim inspection</h3><p>A validated 5,000-frame synthetic crack dataset, mask-alignment checks, and live structural-crack segmentation tooling.</p></div></article>
         <article><time>2026</time><div><h3>Eco-Rover</h3><p>An integrated mobile platform that brings autonomy, sensing, collection behavior, and Customarm work into a public-environment use case.</p></div></article>
         <article><time>2026</time><div><h3>Echo Full self-drive</h3><p>Isaac Sim 5.1, ROS 2 Jazzy, Nav2, RTX LiDAR, and evidence-gated full-road autonomous navigation.</p></div></article>
@@ -340,7 +340,7 @@
           <div class="detail-group">
             <p class="detail-label">Research stack</p>
             <div class="stack-list">
-              <span>Robot Learning <b>LeRobot · ACT · VLA · PyTorch</b></span>
+              <span>Robot Learning <b>LeRobot · Echo Flow Lite · Flow Matching · PyTorch</b></span>
               <span>Simulation <b>Isaac Sim · MuJoCo</b></span>
               <span>Robotics <b>ROS2 · URDF · IK</b></span>
               <span>Deployment <b>Jetson · TensorRT · PX4</b></span>
