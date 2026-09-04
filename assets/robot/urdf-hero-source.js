@@ -202,100 +202,6 @@ if (hero) {
       requestRender();
     });
 
-    // The supplied V2 URDF contains the exact joint tree but references STL files
-    // that were not included with it. These lightweight shells keep that kinematic
-    // model usable on the static site without inventing a second joint hierarchy.
-    const shellMaterials = {
-      base: new THREE.MeshStandardMaterial({ color: 0x595c66, roughness: 0.56, metalness: 0.18 }),
-      link1: new THREE.MeshStandardMaterial({ color: 0x408cd9, roughness: 0.5, metalness: 0.12 }),
-      link2: new THREE.MeshStandardMaterial({ color: 0xe69e38, roughness: 0.5, metalness: 0.1 }),
-      link3: new THREE.MeshStandardMaterial({ color: 0xebc759, roughness: 0.52, metalness: 0.08 }),
-      link4: new THREE.MeshStandardMaterial({ color: 0x59b873, roughness: 0.5, metalness: 0.1 }),
-      link5: new THREE.MeshStandardMaterial({ color: 0x8c66cc, roughness: 0.5, metalness: 0.1 }),
-      rocker: new THREE.MeshStandardMaterial({ color: 0xb5b7bf, roughness: 0.48, metalness: 0.2 }),
-      jaw: new THREE.MeshStandardMaterial({ color: 0xe04c47, roughness: 0.5, metalness: 0.08 }),
-      hardware: new THREE.MeshStandardMaterial({ color: 0x24282c, roughness: 0.34, metalness: 0.52 }),
-      edge: new THREE.MeshStandardMaterial({ color: 0xe7e9e6, roughness: 0.42, metalness: 0.24 }),
-    };
-
-    const addBox = (group, size, position, material, rotation = [0, 0, 0]) => {
-      const mesh = new THREE.Mesh(new THREE.BoxGeometry(...size), material);
-      mesh.position.set(...position);
-      mesh.rotation.set(...rotation);
-      group.add(mesh);
-      return mesh;
-    };
-
-    const addCylinder = (group, radius, length, position, material, axis = 'z') => {
-      const mesh = new THREE.Mesh(new THREE.CylinderGeometry(radius, radius, length, 32), material);
-      mesh.position.set(...position);
-      if (axis === 'z') mesh.rotation.x = Math.PI / 2;
-      if (axis === 'x') mesh.rotation.z = -Math.PI / 2;
-      group.add(mesh);
-      return mesh;
-    };
-
-    const addJointHousing = (group, position, axis, material) => {
-      addCylinder(group, 31, 58, position, shellMaterials.hardware, axis);
-      addCylinder(group, 24, 61, position, material, axis);
-      const capOffset = axis === 'x' ? [31, 0, 0] : axis === 'y' ? [0, 31, 0] : [0, 0, 31];
-      addCylinder(
-        group,
-        8,
-        3,
-        position.map((value, index) => value + capOffset[index]),
-        shellMaterials.edge,
-        axis
-      );
-    };
-
-    const buildProceduralShell = (path) => {
-      const name = path.split('/').pop()?.toLowerCase();
-      const group = new THREE.Group();
-
-      if (name === 'base_link.stl') {
-        addBox(group, [112, 96, 10], [0, 0, 5], shellMaterials.hardware);
-        addCylinder(group, 47, 42, [0, 0, 29], shellMaterials.base);
-        addCylinder(group, 36, 5, [0, 0, 52], shellMaterials.edge);
-      } else if (name === 'link1.stl') {
-        addBox(group, [68, 58, 48], [0, 0, 26], shellMaterials.link1);
-        addJointHousing(group, [0, 0, 56], 'y', shellMaterials.link1);
-        addBox(group, [42, 64, 8], [0, 0, 5], shellMaterials.edge);
-      } else if (name === 'link2.stl' || name === 'link3.stl') {
-        const material = name === 'link2.stl' ? shellMaterials.link2 : shellMaterials.link3;
-        addBox(group, [18, 48, 136], [-13, 0, 90], material);
-        addBox(group, [18, 48, 136], [13, 0, 90], material);
-        addBox(group, [50, 50, 18], [0, 0, 48], shellMaterials.hardware);
-        addJointHousing(group, [0, 0, 0], 'y', material);
-        addJointHousing(group, [0, 0, 180], 'y', material);
-      } else if (name === 'link4.stl') {
-        addJointHousing(group, [0, 0, 0], 'y', shellMaterials.link4);
-        addBox(group, [54, 46, 46], [0, 0, 26], shellMaterials.link4);
-        addCylinder(group, 24, 48, [0, 0, 50], shellMaterials.hardware);
-      } else if (name === 'link5.stl') {
-        addCylinder(group, 28, 52, [0, 0, 0], shellMaterials.link5);
-        addBox(group, [46, 52, 132], [0, 0, 86], shellMaterials.link5);
-        addBox(group, [56, 66, 16], [0, 0, 158], shellMaterials.hardware);
-        addBox(group, [46, 74, 18], [0, 0, 176], shellMaterials.edge);
-        addBox(group, [30, 38, 24], [35, 0, 124], shellMaterials.hardware, [0, -0.18, 0]);
-      } else if (name === 'rocker_l.stl' || name === 'rocker_r.stl') {
-        const side = name === 'rocker_l.stl' ? 1 : -1;
-        addCylinder(group, 10, 22, [0, 0, 0], shellMaterials.hardware, 'x');
-        addBox(group, [16, 12, 45], [8, side * 5, 21], shellMaterials.rocker, [side * 0.12, 0, 0]);
-        addCylinder(group, 8, 18, [17, side * 10, 38], shellMaterials.edge, 'x');
-      } else if (name === 'jaw_l.stl' || name === 'jaw_r.stl') {
-        const side = name === 'jaw_l.stl' ? 1 : -1;
-        addBox(group, [15, 13, 57], [-8, side * 2, 27], shellMaterials.jaw, [side * 0.08, 0, 0]);
-        addBox(group, [22, 18, 16], [-9, side * 3, 56], shellMaterials.hardware);
-        addBox(group, [6, 22, 28], [-18, side * 3, 51], shellMaterials.edge);
-      } else {
-        return null;
-      }
-
-      group.userData.proceduralV2Shell = true;
-      return group;
-    };
-
     const loadingManager = new THREE.LoadingManager();
     const loader = new URDFLoader(loadingManager);
     const meshCache = new Map();
@@ -303,12 +209,6 @@ if (hero) {
     let modelLoadFailed = false;
 
     loader.loadMeshCb = (path, manager, done) => {
-      const proceduralShell = buildProceduralShell(path);
-      if (proceduralShell) {
-        done(proceduralShell);
-        return;
-      }
-
       const cached = meshCache.get(path);
       if (cached?.object) {
         done(cached.object.clone());
