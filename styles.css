@@ -86,7 +86,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outlin
 .urdf-joint-chip b { font-weight: 800; }
 .urdf-ready .urdf-joint-chip { opacity: 1; transform: none; }
 .urdf-status { position: absolute; left: 50%; bottom: 50%; z-index: 5; margin: 0; padding: 10px 13px; border: 1px solid rgba(21,24,22,.14); border-radius: 999px; color: var(--muted); background: rgba(244,244,239,.9); font-size: 12px; font-weight: 700; transform: translate(-50%, 50%); transition: opacity .25s ease; }
-.urdf-ready .urdf-status { opacity: 0; pointer-events: none; }
+.urdf-ready .urdf-status { opacity: 0; visibility: hidden; pointer-events: none; }
 .hero-visual[data-urdf-state="fallback"] .urdf-motion-toggle, .hero-visual[data-urdf-state="fallback"] .urdf-joint-chip, .hero-visual[data-urdf-state="fallback"] .visual-note-c { display: none; }
 .svg-muted { color: #7b827c; }
 .robot { color: var(--ink); }
